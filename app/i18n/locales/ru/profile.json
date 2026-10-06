@@ -1,0 +1,9 @@
+{
+  "tabs": { "orders": "Заказы", "settings": "Настройки" },
+  "orders": { "title": "Мои заказы", "empty": "Нет заказов", "emptyBtn": "Перейти в меню" },
+  "settings": {
+    "personal": { "title": "Личные данные", "name": "Имя", "phone": "Телефон", "email": "Email", "edit": "Редактировать", "save": "Сохранить" },
+    "stats": { "title": "Статистика", "total": "Всего заказов", "favourite": "Любимое блюдо", "spent": "Потрачено" },
+    "security": { "title": "Безопасность", "changePass": "Изменить пароль", "logout": "Выйти из аккаунта" }
+  }
+}

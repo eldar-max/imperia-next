@@ -1,0 +1,27 @@
+{
+  "nav": {
+    "menu": "Menu", "promotions": "Promotions", "booking": "Booking",
+    "contacts": "Contacts", "cart": "Cart", "login": "Sign In",
+    "logout": "Sign Out", "profile": "Profile", "admin": "Dashboard"
+  },
+  "footer": {
+    "navigation": "Navigation", "contacts": "Contacts", "workHours": "Working Hours",
+    "rights": "All rights reserved", "privacy": "Privacy Policy", "offer": "Public Offer",
+    "monFri": "Mon — Fri", "satSun": "Sat — Sun", "delivery": "Delivery",
+    "description": "A chain of restaurants with authentic Italian pizza. Fast delivery, fresh ingredients."
+  },
+  "buttons": {
+    "orderNow": "Order Now", "addToCart": "Add to Cart", "bookTable": "Book a Table",
+    "allMenu": "Full Menu", "allPromos": "All Promotions", "send": "Send",
+    "cancel": "Cancel", "save": "Save", "edit": "Edit", "delete": "Delete",
+    "confirm": "Confirm", "back": "Back", "continue": "Continue",
+    "close": "Close", "apply": "Apply", "download": "Download"
+  },
+  "status": {
+    "pending": "Pending", "confirmed": "Confirmed", "preparing": "Preparing",
+    "ready": "Ready", "delivering": "Delivering", "delivered": "Delivered", "cancelled": "Cancelled"
+  },
+  "loading": "Loading...", "error": "An error occurred", "notFound": "Not found",
+  "currency": "sum", "free": "Free",
+  "languages": { "ru": "Русский", "en": "English", "kg": "Кыргызча" }
+}

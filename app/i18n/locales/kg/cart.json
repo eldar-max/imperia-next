@@ -1,0 +1,11 @@
+{
+  "title": "Себет", "clear": "Тазалоо",
+  "empty": { "title": "Себет бош", "subtitle": "Менюдан даамдуу пицца кошуңуз", "btn": "Менюга өтүү" },
+  "continue": "Дагы тандоо",
+  "promo": { "label": "Промокод", "placeholder": "PIZZA20", "apply": "ОК", "applied": "колдонулду" },
+  "summary": {
+    "title": "Жыйынтык", "subtotal": "Аралык сумма", "discount": "Арзандоо",
+    "delivery": "Жеткирүү", "total": "Жалпысы",
+    "checkout": "Заказ берүү", "secure": "Коопсуз төлөм"
+  }
+}

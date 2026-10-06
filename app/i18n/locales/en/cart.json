@@ -1,0 +1,11 @@
+{
+  "title": "Cart", "clear": "Clear",
+  "empty": { "title": "Cart is empty", "subtitle": "Add delicious pizza from the menu", "btn": "Go to Menu" },
+  "continue": "Continue shopping",
+  "promo": { "label": "Promo code", "placeholder": "PIZZA20", "apply": "OK", "applied": "applied" },
+  "summary": {
+    "title": "Summary", "subtotal": "Subtotal", "discount": "Discount",
+    "delivery": "Delivery", "total": "Total",
+    "checkout": "Place Order", "secure": "Secure payment"
+  }
+}

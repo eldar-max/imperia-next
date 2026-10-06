@@ -1,0 +1,12 @@
+{
+  "title": "Корзина",
+  "clear": "Очистить",
+  "empty": { "title": "Корзина пуста", "subtitle": "Добавьте вкусную пиццу из меню", "btn": "Перейти в меню" },
+  "continue": "Продолжить покупки",
+  "promo": { "label": "Промокод", "placeholder": "PIZZA20", "apply": "ОК", "applied": "применён" },
+  "summary": {
+    "title": "Итого", "subtotal": "Подытог", "discount": "Скидка",
+    "delivery": "Доставка", "total": "Итого",
+    "checkout": "Оформить заказ", "secure": "Безопасная оплата"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "login": { "tab": "Кирүү", "title": "Аккаунтуңузга кириңиз", "submit": "Кирүү" },
+  "register": { "tab": "Катталуу", "title": "Жаңы аккаунт түзүү", "submit": "Катталуу" },
+  "fields": { "name": "Аты", "phone": "Телефон", "email": "Email", "password": "Сырсөз", "confirm": "Сырсөздү ырастоо" },
+  "placeholders": { "name": "Атыңыз", "phone": "+998 XX XXX XX XX", "email": "email@example.com", "password": "Сырсөздү киргизиңиз", "confirm": "Кайра", "minPass": "Минимум 6 символ" },
+  "forgot": "Сырсөздү унуттуңузбу?", "or": "же аркылуу кириңиз", "telegram": "Telegram аркылуу кирүү", "back": "← Башкы бетке кайтуу",
+  "errors": { "passwordMismatch": "Сырсөздөр дал келбейт", "minPassword": "Сырсөз минимум 6 символ болушу керек" },
+  "reset": {
+    "title": "Сырсөздү унуттуңузбу?",
+    "subtitle": "Email дарегиңизди киргизиңиз — Gmail почтаңызга шилтеме жөнөтөбүз.",
+    "email": "Email", "submit": "Кат жөнөтүү", "back": "Артка",
+    "sent": { "title": "Кат жөнөтүлдү!", "subtitle": "Спам папкасын да текшериңиз.", "btn": "Кирүү" }
+  }
+}

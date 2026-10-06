@@ -1,0 +1,30 @@
+{
+  "nav": {
+    "dashboard": "Дашборд", "orders": "Заказы", "menu": "Меню",
+    "branches": "Филиалы", "analytics": "Аналитика",
+    "finance": "Финансы", "staff": "Персонал", "promos": "Акции"
+  },
+  "dashboard": {
+    "title": "Дашборд",
+    "todayRevenue": "Выручка сегодня", "todayOrders": "Заказов сегодня",
+    "avgCheck": "Средний чек", "weekRevenue": "За неделю",
+    "revenueChart": "Выручка за 7 дней", "topItems": "Топ блюд",
+    "recentOrders": "Последние заказы", "byBranch": "По филиалам",
+    "openSite": "Открыть сайт", "logout": "Выйти"
+  },
+  "orders": {
+    "title": "Управление заказами",
+    "id": "ID", "client": "Клиент", "amount": "Сумма",
+    "type": "Тип", "status": "Статус", "time": "Время", "actions": "Действия",
+    "delivery": "Доставка", "pickup": "Самовывоз",
+    "advance": "Продвинуть", "cancelOrder": "Отменить",
+    "refresh": "Обновить", "search": "Поиск по ID или имени..."
+  },
+  "finance": {
+    "title": "Финансы",
+    "income": "Доходы", "expense": "Расходы", "profit": "Прибыль",
+    "add": "Добавить", "type": "Тип", "category": "Категория",
+    "amount": "Сумма", "description": "Описание", "branch": "Филиал",
+    "date": "Дата", "all": "Все", "incomes": "Доходы", "expenses": "Расходы"
+  }
+}

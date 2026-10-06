@@ -1,0 +1,9 @@
+{
+  "hero": { "tag": "WE ARE EVERYWHERE", "title": "Our Restaurants", "subtitle": "branches across the city" },
+  "contact": { "title": "Get in Touch", "phone": "Phone", "email": "Email", "telegram": "Telegram", "instagram": "Instagram" },
+  "feedback": {
+    "title": "Feedback", "name": "Name", "phone": "Phone", "message": "Message",
+    "placeholder": "Your question or suggestion...", "submit": "Send Message",
+    "success": { "title": "Sent!", "subtitle": "We'll reply within 24 hours", "again": "Write again" }
+  }
+}

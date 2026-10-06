@@ -1,0 +1,9 @@
+{
+  "tabs": { "orders": "Заказдар", "settings": "Орнотуулар" },
+  "orders": { "title": "Менин заказдарым", "empty": "Заказ жок", "emptyBtn": "Менюга өтүү" },
+  "settings": {
+    "personal": { "title": "Жеке маалымат", "name": "Аты", "phone": "Телефон", "email": "Email", "edit": "Өзгөртүү", "save": "Сактоо" },
+    "stats": { "title": "Статистика", "total": "Жалпы заказдар", "favourite": "Сүйүктүү тамак", "spent": "Жалпы чыгым" },
+    "security": { "title": "Коопсуздук", "changePass": "Сырсөздү өзгөртүү", "logout": "Чыгуу" }
+  }
+}

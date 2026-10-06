@@ -1,0 +1,14 @@
+{
+  "login": { "tab": "Sign In", "title": "Sign in to your account", "submit": "Sign In" },
+  "register": { "tab": "Register", "title": "Create a new account", "submit": "Register" },
+  "fields": { "name": "Name", "phone": "Phone", "email": "Email", "password": "Password", "confirm": "Confirm Password" },
+  "placeholders": { "name": "Your name", "phone": "+998 XX XXX XX XX", "email": "email@example.com", "password": "Enter password", "confirm": "Again", "minPass": "Minimum 6 characters" },
+  "forgot": "Forgot password?", "or": "or sign in with", "telegram": "Sign in with Telegram", "back": "← Back to Home",
+  "errors": { "passwordMismatch": "Passwords do not match", "minPassword": "Password must be at least 6 characters" },
+  "reset": {
+    "title": "Forgot Password?",
+    "subtitle": "Enter your email — we will send a password reset link to your Gmail.",
+    "email": "Email", "submit": "Send Email", "back": "Back",
+    "sent": { "title": "Email sent!", "subtitle": "Check your Spam folder if not received.", "btn": "Sign In" }
+  }
+}

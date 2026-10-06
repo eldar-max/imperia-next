@@ -1,0 +1,20 @@
+{
+  "title": "Checkout",
+  "steps": { "data": "Details", "delivery": "Delivery", "payment": "Payment" },
+  "step1": { "title": "Contact Details", "name": "Name", "phone": "Phone", "email": "Email", "next": "Continue" },
+  "step2": {
+    "title": "Delivery Method", "delivery": "Delivery", "pickup": "Pickup",
+    "address": "Delivery Address", "addressPlaceholder": "Street, house, apartment",
+    "branch": "Choose branch", "comment": "Comment", "commentPlaceholder": "Intercom, floor, preferences..."
+  },
+  "step3": {
+    "title": "Payment Method", "cash": "Cash", "cashDesc": "Upon delivery",
+    "card": "Bank Card", "cardDesc": "Online or on delivery",
+    "qr": "QR Payment", "qrDesc": "Click / Payme / Uzum", "confirm": "Confirm"
+  },
+  "order": "Your Order", "deliveryFree": "Free",
+  "success": {
+    "title": "Order Placed!", "orderNum": "Order number", "time": "Estimated time",
+    "timeValue": "25–35 minutes", "track": "Track Order", "more": "Order More"
+  }
+}

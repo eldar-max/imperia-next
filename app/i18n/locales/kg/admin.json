@@ -1,0 +1,28 @@
+
+  "nav" {
+    "dashboard": "Башкы бет", "orders": "Заказдар", "menu": "Меню",
+    "branches": "Филиалдар", "analytics": "Аналитика",
+    "finance": "Финансы", "staff": "Кызматкерлер", "promos": "Акциялар"
+  },
+  "dashboard": {
+    "title": "Башкаруу панели", "todayRevenue": "Бүгүнкү түшүм", "todayOrders": "Бүгүнкү заказдар",
+    "avgCheck": "Орточо чек", "weekRevenue": "Жума ичинде",
+    "revenueChart": "7 күндөгү түшүм", "topItems": "Топ тамактар",
+    "recentOrders": "Акыркы заказдар", "byBranch": "Филиал боюнча",
+    "openSite": "Сайтты ачуу", "logout": "Чыгуу"
+  },
+  "orders": {
+    "title": "Заказдарды башкаруу",
+    "id": "ID", "client": "Кардар", "amount": "Сумма",
+    "type": "Түрү", "status": "Статус", "time": "Убакыт", "actions": "Аракеттер",
+    "delivery": "Жеткирүү", "pickup": "Өзүм алам",
+    "advance": "Алдыга жылдыруу", "cancelOrder": "Жокко чыгаруу",
+    "refresh": "Жаңылоо", "search": "ID же аты боюнча издөө..."
+  },
+  "finance": {
+    "title": "Финансы", "income": "Киреше", "expense": "Чыгым", "profit": "Пайда",
+    "add": "Кошуу", "type": "Түрү", "category": "Категория",
+    "amount": "Сумма", "description": "Сүрөттөмө", "branch": "Филиал",
+    "date": "Дата", "all": "Баары", "incomes": "Кирешелер", "expenses": "Чыгымдар"
+  }
+

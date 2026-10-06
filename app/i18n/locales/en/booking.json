@@ -1,0 +1,13 @@
+{
+  "hero": { "tag": "BOOKING", "title": "Book a Table", "subtitle": "Free · Fast · Guaranteed" },
+  "form": {
+    "restaurant": "Choose a restaurant", "date": "Date", "time": "Time", "guests": "Guests",
+    "name": "Name", "phone": "Phone", "occasion": "Occasion (optional)", "comment": "Comment",
+    "submit": "Book Table", "note": "Free booking · Cancel 1 hour before",
+    "occasions": { "birthday": "Birthday", "romantic": "Romantic", "corporate": "Corporate", "family": "Family", "holiday": "Holiday" }
+  },
+  "success": {
+    "title": "Table Booked!", "bookingId": "Booking number", "date": "Date", "time": "Time",
+    "guests": "Guests", "phone": "Phone", "note": "Confirmation will be sent to your number", "again": "Book again"
+  }
+}

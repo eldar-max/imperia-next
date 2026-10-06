@@ -1,0 +1,9 @@
+{
+  "hero": { "tag": "БИЗ ВЕЗДЕ", "title": "Биздин ресторандар", "subtitle": "шаар боюнча филиал" },
+  "contact": { "title": "Биз менен байланышыңыз", "phone": "Телефон", "email": "Email", "telegram": "Telegram", "instagram": "Instagram" },
+  "feedback": {
+    "title": "Пикир", "name": "Атыңыз", "phone": "Телефон", "message": "Билдирүү",
+    "placeholder": "Суроонуз же сунушуңуз...", "submit": "Билдирүү жөнөтүү",
+    "success": { "title": "Жөнөтүлдү!", "subtitle": "24 саат ичинде жооп беребиз", "again": "Кайра жазуу" }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "login": { "tab": "Войти", "title": "Войдите в свой аккаунт", "submit": "Войти" },
+  "register": { "tab": "Регистрация", "title": "Создайте новый аккаунт", "submit": "Зарегистрироваться" },
+  "fields": { "name": "Имя", "phone": "Телефон", "email": "Email", "password": "Пароль", "confirm": "Повторите пароль" },
+  "placeholders": { "name": "Ваше имя", "phone": "+998 XX XXX XX XX", "email": "email@example.com", "password": "Введите пароль", "confirm": "Ещё раз", "minPass": "Минимум 6 символов" },
+  "forgot": "Забыли пароль?",
+  "or": "или войдите через",
+  "telegram": "Войти через Telegram",
+  "back": "← Вернуться на главную",
+  "errors": { "passwordMismatch": "Пароли не совпадают", "minPassword": "Пароль минимум 6 символов" },
+  "reset": {
+    "title": "Забыли пароль?",
+    "subtitle": "Введите email — мы отправим ссылку для сброса пароля на вашу почту Gmail.",
+    "email": "Email", "submit": "Отправить письмо", "back": "Назад",
+    "sent": { "title": "Письмо отправлено!", "subtitle": "Проверьте папку Спам если не пришло.", "btn": "Войти" }
+  }
+}

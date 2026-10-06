@@ -1,0 +1,9 @@
+{
+  "tabs": { "orders": "Orders", "settings": "Settings" },
+  "orders": { "title": "My Orders", "empty": "No orders yet", "emptyBtn": "Go to Menu" },
+  "settings": {
+    "personal": { "title": "Personal Info", "name": "Name", "phone": "Phone", "email": "Email", "edit": "Edit", "save": "Save" },
+    "stats": { "title": "Statistics", "total": "Total Orders", "favourite": "Favourite Dish", "spent": "Total Spent" },
+    "security": { "title": "Security", "changePass": "Change Password", "logout": "Sign Out" }
+  }
+}

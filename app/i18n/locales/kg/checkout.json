@@ -1,0 +1,20 @@
+{
+  "title": "Заказды тариздөө",
+  "steps": { "data": "Маалымат", "delivery": "Жеткирүү", "payment": "Төлөм" },
+  "step1": { "title": "Байланыш маалыматтары", "name": "Аты", "phone": "Телефон", "email": "Email", "next": "Улантуу" },
+  "step2": {
+    "title": "Алуу ыкмасы", "delivery": "Жеткирүү", "pickup": "Өзүм алам",
+    "address": "Жеткирүү дареги", "addressPlaceholder": "Көчө, үй, батир",
+    "branch": "Филиалды тандаңыз", "comment": "Комментарий", "commentPlaceholder": "Домофон, кабат, тилектер..."
+  },
+  "step3": {
+    "title": "Төлөм ыкмасы", "cash": "Накталай", "cashDesc": "Алганда",
+    "card": "Банк картасы", "cardDesc": "Онлайн же алганда",
+    "qr": "QR-төлөм", "qrDesc": "Click / Payme / Uzum", "confirm": "Ырастоо"
+  },
+  "order": "Сиздин заказ", "deliveryFree": "Акысыз",
+  "success": {
+    "title": "Заказ кабыл алынды!", "orderNum": "Заказ номери", "time": "Күтүлгөн убакыт",
+    "timeValue": "25–35 мүнөт", "track": "Заказды байкоо", "more": "Дагы заказ берүү"
+  }
+}

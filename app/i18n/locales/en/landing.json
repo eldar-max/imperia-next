@@ -1,0 +1,24 @@
+{
+  "hero": {
+    "badge": "Hot delivery in 30 minutes",
+    "title1": "Authentic", "title2": "Italian", "title3": "Pizza",
+    "description": "Fresh ingredients, sourdough dough, traditional recipes. Order online or book a table right now.",
+    "orderBtn": "Order Now", "bookBtn": "Book a Table",
+    "stats": { "orders": "Orders", "clients": "Clients", "branches": "Branches" },
+    "ratingLabel": "rating", "deliveryBadge": "Delivery in 30 min"
+  },
+  "features": {
+    "delivery": { "title": "30 Minutes", "desc": "Hot pizza at your door — we guarantee delivery speed" },
+    "rating": { "title": "Rating 4.9/5", "desc": "Over 15,000 satisfied customers every month" },
+    "free": { "title": "Free Delivery", "desc": "Free delivery on orders over 80,000 sum" },
+    "payment": { "title": "Secure Payment", "desc": "QR code, bank card or cash" }
+  },
+  "popular": { "tag": "TOP PICKS", "title": "Popular Dishes", "allMenu": "Full Menu" },
+  "promotions": { "tag": "SPECIALLY FOR YOU", "title": "Deals & Offers", "allPromos": "All Deals" },
+  "cta": {
+    "tag": "MOBILE APP",
+    "title": "Download our app",
+    "description": "Order faster, track delivery in real time and get exclusive discounts for app users.",
+    "appStore": "App Store", "googlePlay": "Google Play"
+  }
+}

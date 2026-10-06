@@ -1,0 +1,794 @@
+// ═══════════════════════════════════════════════════════════════
+// ИМПЕРИЯ ПИЦЦА — Полная схема базы данных
+// База данных: Neon PostgreSQL
+// ORM: Prisma
+// Версия: 2.0
+// ═══════════════════════════════════════════════════════════════
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DATABASE_URL")
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ENUMS
+// ═══════════════════════════════════════════════════════════════
+
+enum Role {
+  founder           // Основатель — полный доступ
+  admin             // Администратор — управление всем
+  branch_manager    // Менеджер филиала — управление филиалом
+  kitchen           // Кухня — просмотр и обновление заказов
+  delivery_manager  // Диспетчер доставки
+  courier           // Курьер — свои доставки
+  waiter            // Официант — заказы в зале
+  cashier           // Кассир — оплата
+  customer          // Клиент
+}
+
+enum Category {
+  pizza     // Пицца
+  snacks    // Закуски
+  desserts  // Десерты
+  drinks    // Напитки
+  sauces    // Соусы
+  combos    // Комбо наборы
+}
+
+enum OrderStatus {
+  pending     // Ожидает подтверждения
+  confirmed   // Подтверждён
+  preparing   // Готовится на кухне
+  ready       // Готов к выдаче/доставке
+  delivering  // Курьер в пути
+  delivered   // Доставлен
+  cancelled   // Отменён
+}
+
+enum OrderType {
+  delivery  // Доставка на дом
+  pickup    // Самовывоз
+  dine_in   // В зале ресторана
+}
+
+enum PaymentMethod {
+  cash    // Наличные
+  card    // Банковская карта
+  qr      // QR-код
+  online  // Онлайн оплата
+  click   // Click (UZ)
+  payme   // Payme (UZ)
+  uzum    // Uzum (UZ)
+}
+
+enum PaymentStatus {
+  pending   // Ожидает оплаты
+  paid      // Оплачено
+  refunded  // Возврат
+  failed    // Ошибка оплаты
+}
+
+enum BookingStatus {
+  pending    // Ожидает подтверждения
+  confirmed  // Подтверждено
+  seated     // Гость сидит за столом
+  cancelled  // Отменено
+  completed  // Завершено
+  no_show    // Не явился
+}
+
+enum TransactionType {
+  income   // Доход
+  expense  // Расход
+}
+
+enum NotificationType {
+  order_new        // Новый заказ
+  order_status     // Смена статуса заказа
+  booking_new      // Новое бронирование
+  booking_confirm  // Подтверждение брони
+  promo            // Акция/скидка
+  system           // Системное
+}
+
+enum DeliveryZoneType {
+  free      // Бесплатная доставка
+  paid      // Платная доставка
+  no_delivery // Нет доставки
+}
+
+enum StaffShiftStatus {
+  active    // На смене
+  completed // Смена завершена
+  cancelled // Отменена
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ПОЛЬЗОВАТЕЛИ
+// ═══════════════════════════════════════════════════════════════
+
+model User {
+  id           String    @id @default(uuid())
+  name         String
+  phone        String    @unique
+  email        String?   @unique
+  password     String
+  role         Role      @default(customer)
+  telegramId   String?   @unique @map("telegram_id")
+  telegramUsername String? @map("telegram_username")
+  avatar       String?
+  dateOfBirth  DateTime? @map("date_of_birth")
+  isActive     Boolean   @default(true)  @map("is_active")
+  isVerified   Boolean   @default(false) @map("is_verified")
+  branchId     String?   @map("branch_id")
+  lastLoginAt  DateTime? @map("last_login_at")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt      @map("updated_at")
+
+  // Связи
+  branch          Branch?          @relation("BranchStaff", fields: [branchId], references: [id])
+  managedBranches Branch[]         @relation("BranchManager")
+  orders          Order[]          @relation("CustomerOrders")
+  courierOrders   Order[]          @relation("CourierOrders")
+  bookings        Booking[]
+  reviews         Review[]
+  transactions    Transaction[]
+  addresses       UserAddress[]
+  notifications   Notification[]
+  loyaltyPoints   LoyaltyAccount?
+  sessions        UserSession[]
+  staffShifts     StaffShift[]
+  pushTokens      PushToken[]
+
+  @@index([phone])
+  @@index([email])
+  @@index([role])
+  @@index([branchId])
+  @@map("users")
+}
+
+// ─── Адреса пользователя ──────────────────────────────────────
+
+model UserAddress {
+  id         String   @id @default(uuid())
+  userId     String   @map("user_id")
+  label      String   // Дом, Работа, Другое
+  address    String
+  apartment  String?
+  floor      String?
+  entrance   String?
+  intercom   String?
+  lat        Float?
+  lng        Float?
+  isDefault  Boolean  @default(false) @map("is_default")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("user_addresses")
+}
+
+// ─── Сессии пользователя ──────────────────────────────────────
+
+model UserSession {
+  id           String   @id @default(uuid())
+  userId       String   @map("user_id")
+  token        String   @unique
+  deviceInfo   String?  @map("device_info")
+  ipAddress    String?  @map("ip_address")
+  expiresAt    DateTime @map("expires_at")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([token])
+  @@map("user_sessions")
+}
+
+// ─── Push токены ──────────────────────────────────────────────
+
+model PushToken {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  token     String   @unique
+  platform  String   // ios | android | web
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("push_tokens")
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ФИЛИАЛЫ
+// ═══════════════════════════════════════════════════════════════
+
+model Branch {
+  id          String   @id @default(uuid())
+  name        String
+  address     String
+  city        String   @default("Ташкент")
+  phone       String?
+  email       String?
+  lat         Float?
+  lng         Float?
+  hours       String   @default("10:00-23:00")
+  hoursJson   Json?    @map("hours_json") // { mon: "10-23", tue: "10-23", ... }
+  isActive    Boolean  @default(true) @map("is_active")
+  managerId   String?  @map("manager_id")
+  image       String?
+  description String?
+  seatsCount  Int      @default(0) @map("seats_count")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  // Связи
+  manager       User?            @relation("BranchManager", fields: [managerId], references: [id])
+  staff         User[]           @relation("BranchStaff")
+  orders        Order[]
+  bookings      Booking[]
+  menuItems     BranchMenuItem[]
+  transactions  Transaction[]
+  tables        Table[]
+  deliveryZones DeliveryZone[]
+  inventory     Inventory[]
+  staffShifts   StaffShift[]
+
+  @@map("branches")
+}
+
+// ─── Столы в ресторане ────────────────────────────────────────
+
+model Table {
+  id          String   @id @default(uuid())
+  branchId    String   @map("branch_id")
+  number      Int
+  seats       Int
+  location    String?  // Зал, Терраса, VIP
+  isActive    Boolean  @default(true) @map("is_active")
+  qrCode      String?  @map("qr_code")
+
+  branch   Branch    @relation(fields: [branchId], references: [id])
+  bookings Booking[]
+
+  @@unique([branchId, number])
+  @@map("tables")
+}
+
+// ─── Зоны доставки ───────────────────────────────────────────
+
+model DeliveryZone {
+  id           String           @id @default(uuid())
+  branchId     String           @map("branch_id")
+  name         String
+  type         DeliveryZoneType @default(paid)
+  deliveryFee  Int              @default(0) @map("delivery_fee")
+  minOrder     Int              @default(0) @map("min_order")
+  estimatedMin Int              @default(30) @map("estimated_min")
+  polygon      Json?            // GeoJSON polygon
+  isActive     Boolean          @default(true) @map("is_active")
+
+  branch Branch @relation(fields: [branchId], references: [id])
+
+  @@map("delivery_zones")
+}
+
+// ═══════════════════════════════════════════════════════════════
+// МЕНЮ
+// ═══════════════════════════════════════════════════════════════
+
+model MenuItem {
+  id          String   @id @default(uuid())
+  name        String
+  nameRu      String?  @map("name_ru")
+  nameEn      String?  @map("name_en")
+  nameKg      String?  @map("name_kg")
+  description String?
+  descRu      String?  @map("desc_ru")
+  descEn      String?  @map("desc_en")
+  descKg      String?  @map("desc_kg")
+  price       Int
+  image       String?
+  images      Json?    @default("[]") // Массив URL изображений
+  weight      String?
+  calories    Int?
+  proteins    Float?
+  fats        Float?
+  carbs       Float?
+  category    Category
+  tags        Json?    @default("[]") // ["spicy", "bestseller"]
+  allergens   Json?    @default("[]") // ["gluten", "dairy"]
+  isActive    Boolean  @default(true)  @map("is_active")
+  isPopular   Boolean  @default(false) @map("is_popular")
+  isNew       Boolean  @default(false) @map("is_new")
+  isVeg       Boolean  @default(false) @map("is_veg")
+  isSpicy     Boolean  @default(false) @map("is_spicy")
+  sortOrder   Int      @default(0)     @map("sort_order")
+  prepTime    Int      @default(15)    @map("prep_time") // минут
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt      @map("updated_at")
+
+  orderItems    OrderItem[]
+  branches      BranchMenuItem[]
+  extras        MenuItemExtra[]
+  inventory     Inventory[]
+
+  @@index([category])
+  @@index([isActive])
+  @@index([isPopular])
+  @@map("menu_items")
+}
+
+// ─── Дополнения к блюдам ─────────────────────────────────────
+
+model MenuItemExtra {
+  id         String  @id @default(uuid())
+  menuItemId String  @map("menu_item_id")
+  name       String
+  price      Int
+  isActive   Boolean @default(true) @map("is_active")
+
+  menuItem MenuItem @relation(fields: [menuItemId], references: [id], onDelete: Cascade)
+
+  @@map("menu_item_extras")
+}
+
+// ─── Меню по филиалам ────────────────────────────────────────
+
+model BranchMenuItem {
+  branchId   String  @map("branch_id")
+  menuItemId String  @map("menu_item_id")
+  price      Int?    // Переопределение цены для филиала
+  isActive   Boolean @default(true) @map("is_active")
+  stock      Int?    // Количество в наличии (null = неограничено)
+
+  branch   Branch   @relation(fields: [branchId], references: [id])
+  menuItem MenuItem @relation(fields: [menuItemId], references: [id])
+
+  @@id([branchId, menuItemId])
+  @@map("branch_menu_items")
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ЗАКАЗЫ
+// ═══════════════════════════════════════════════════════════════
+
+model Order {
+  id              String        @id
+  userId          String?       @map("user_id")
+  branchId        String?       @map("branch_id")
+  courierId       String?       @map("courier_id")
+  tableId         String?       @map("table_id")
+
+  // Гостевые данные (без регистрации)
+  guestName       String?       @map("guest_name")
+  guestPhone      String?       @map("guest_phone")
+  guestEmail      String?       @map("guest_email")
+
+  // Статус и тип
+  status          OrderStatus   @default(pending)
+  type            OrderType     @default(delivery)
+
+  // Доставка
+  deliveryAddress String?       @map("delivery_address")
+  deliveryLat     Float?        @map("delivery_lat")
+  deliveryLng     Float?        @map("delivery_lng")
+  deliveryZoneId  String?       @map("delivery_zone_id")
+  comment         String?
+
+  // Оплата
+  paymentMethod   PaymentMethod @default(cash) @map("payment_method")
+  paymentStatus   PaymentStatus @default(pending) @map("payment_status")
+  paymentId       String?       @map("payment_id")  // ID транзакции платёжной системы
+  paidAt          DateTime?     @map("paid_at")
+
+  // Промокод и скидка
+  promoCode       String?       @map("promo_code")
+  discount        Int           @default(0)  // процент скидки
+  discountAmount  Int           @default(0)  @map("discount_amount") // сумма скидки
+
+  // Суммы
+  subtotal        Int           // до скидки
+  deliveryFee     Int           @default(0) @map("delivery_fee")
+  serviceFee      Int           @default(0) @map("service_fee")  // сервисный сбор
+  total           Int           // итого к оплате
+
+  // Время
+  estimatedAt     DateTime?     @map("estimated_at")
+  acceptedAt      DateTime?     @map("accepted_at")  // когда принял ресторан
+  preparedAt      DateTime?     @map("prepared_at")  // когда готово
+  pickedAt        DateTime?     @map("picked_at")    // когда забрал курьер
+  deliveredAt     DateTime?     @map("delivered_at") // когда доставлено
+  cancelledAt     DateTime?     @map("cancelled_at")
+  cancelReason    String?       @map("cancel_reason")
+
+  // Рейтинг
+  rating          Int?          // 1-5
+  ratingComment   String?       @map("rating_comment")
+
+  createdAt       DateTime      @default(now()) @map("created_at")
+  updatedAt       DateTime      @updatedAt @map("updated_at")
+
+  // Связи
+  user     User?       @relation("CustomerOrders", fields: [userId], references: [id])
+  courier  User?       @relation("CourierOrders", fields: [courierId], references: [id])
+  branch   Branch?     @relation(fields: [branchId], references: [id])
+  items    OrderItem[]
+  reviews  Review[]
+  statusHistory OrderStatusHistory[]
+
+  @@index([status])
+  @@index([createdAt])
+  @@index([branchId])
+  @@index([userId])
+  @@index([courierId])
+  @@map("orders")
+}
+
+// ─── Позиции заказа ──────────────────────────────────────────
+
+model OrderItem {
+  id         String  @id @default(uuid())
+  orderId    String  @map("order_id")
+  menuItemId String  @map("menu_item_id")
+  name       String  // Снимок названия
+  price      Int     // Снимок цены
+  qty        Int
+  extras     Json?   @default("[]")  // Выбранные дополнения
+  note       String? // Комментарий к позиции
+
+  order    Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  menuItem MenuItem @relation(fields: [menuItemId], references: [id])
+
+  @@map("order_items")
+}
+
+// ─── История статусов заказа ─────────────────────────────────
+
+model OrderStatusHistory {
+  id        String      @id @default(uuid())
+  orderId   String      @map("order_id")
+  status    OrderStatus
+  changedBy String?     @map("changed_by")  // userId кто поменял
+  note      String?
+  createdAt DateTime    @default(now()) @map("created_at")
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
+  @@map("order_status_history")
+}
+
+// ═══════════════════════════════════════════════════════════════
+// БРОНИРОВАНИЯ
+// ═══════════════════════════════════════════════════════════════
+
+model Booking {
+  id          String        @id
+  userId      String?       @map("user_id")
+  branchId    String        @map("branch_id")
+  tableId     String?       @map("table_id")
+
+  guestName   String        @map("guest_name")
+  guestPhone  String        @map("guest_phone")
+  guestEmail  String?       @map("guest_email")
+
+  date        String        // YYYY-MM-DD
+  time        String        // HH:MM
+  guests      Int
+  duration    Int           @default(120) // минут
+  occasion    String?
+  comment     String?
+  status      BookingStatus @default(pending)
+
+  confirmedAt DateTime?     @map("confirmed_at")
+  cancelledAt DateTime?     @map("cancelled_at")
+  cancelReason String?      @map("cancel_reason")
+
+  createdAt   DateTime      @default(now()) @map("created_at")
+  updatedAt   DateTime      @updatedAt @map("updated_at")
+
+  user   User?   @relation(fields: [userId], references: [id])
+  branch Branch  @relation(fields: [branchId], references: [id])
+  table  Table?  @relation(fields: [tableId], references: [id])
+
+  @@index([date])
+  @@index([branchId])
+  @@index([status])
+  @@map("bookings")
+}
+
+// ═══════════════════════════════════════════════════════════════
+// АКЦИИ И НОВОСТИ
+// ═══════════════════════════════════════════════════════════════
+
+model Promotion {
+  id           String    @id @default(uuid())
+  type         String    // promo | news
+  title        String
+  titleEn      String?   @map("title_en")
+  titleKg      String?   @map("title_kg")
+  description  String?
+  descEn       String?   @map("desc_en")
+  descKg       String?   @map("desc_kg")
+  badge        String?
+  image        String?
+  discount     Int?
+  promoCode    String?   @unique @map("promo_code")
+  promoType    String?   @map("promo_type")  // percent | fixed | free_delivery
+  minOrder     Int?      @map("min_order")
+  maxUses      Int?      @map("max_uses")    // null = неограниченно
+  usesPerUser  Int       @default(1) @map("uses_per_user")
+  validFrom    DateTime? @map("valid_from")
+  validUntil   DateTime? @map("valid_until")
+  isActive     Boolean   @default(true) @map("is_active")
+  sortOrder    Int       @default(0) @map("sort_order")
+  useCount     Int       @default(0) @map("use_count")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+
+  promoUses PromoUse[]
+
+  @@map("promotions")
+}
+
+// ─── Использования промокода ─────────────────────────────────
+
+model PromoUse {
+  id          String   @id @default(uuid())
+  promotionId String   @map("promotion_id")
+  userId      String?  @map("user_id")
+  orderId     String?  @map("order_id")
+  usedAt      DateTime @default(now()) @map("used_at")
+
+  promotion Promotion @relation(fields: [promotionId], references: [id])
+
+  @@index([promotionId])
+  @@index([userId])
+  @@map("promo_uses")
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ФИНАНСЫ
+// ═══════════════════════════════════════════════════════════════
+
+model Transaction {
+  id          String          @id @default(uuid())
+  type        TransactionType
+  category    String
+  amount      Int
+  description String?
+  branchId    String?         @map("branch_id")
+  orderId     String?         @map("order_id")
+  createdBy   String?         @map("created_by")
+  receiptUrl  String?         @map("receipt_url")
+  metadata    Json?           // Дополнительные данные
+  createdAt   DateTime        @default(now()) @map("created_at")
+
+  branch Branch? @relation(fields: [branchId], references: [id])
+  user   User?   @relation(fields: [createdBy], references: [id])
+
+  @@index([branchId])
+  @@index([createdAt])
+  @@index([type])
+  @@map("transactions")
+}
+
+// ─── Категории расходов/доходов ───────────────────────────────
+
+model FinanceCategory {
+  id        String          @id @default(uuid())
+  name      String          @unique
+  type      TransactionType
+  color     String?
+  icon      String?
+  isActive  Boolean         @default(true) @map("is_active")
+
+  @@map("finance_categories")
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ОТЗЫВЫ
+// ═══════════════════════════════════════════════════════════════
+
+model Review {
+  id           String   @id @default(uuid())
+  orderId      String   @map("order_id")
+  userId       String?  @map("user_id")
+  branchId     String?  @map("branch_id")
+  rating       Int      // 1-5
+  foodRating   Int?     @map("food_rating")    // Оценка еды
+  serviceRating Int?    @map("service_rating") // Оценка сервиса
+  deliveryRating Int?   @map("delivery_rating")// Оценка доставки
+  comment      String?
+  images       Json?    @default("[]")
+  isPublished  Boolean  @default(true) @map("is_published")
+  reply        String?  // Ответ ресторана
+  repliedAt    DateTime? @map("replied_at")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  order  Order  @relation(fields: [orderId], references: [id])
+  user   User?  @relation(fields: [userId], references: [id])
+
+  @@index([orderId])
+  @@index([branchId])
+  @@map("reviews")
+}
+
+// ═══════════════════════════════════════════════════════════════
+// УВЕДОМЛЕНИЯ
+// ═══════════════════════════════════════════════════════════════
+
+model Notification {
+  id        String           @id @default(uuid())
+  userId    String           @map("user_id")
+  type      NotificationType
+  title     String
+  body      String
+  data      Json?            // Дополнительные данные (orderId, etc.)
+  isRead    Boolean          @default(false) @map("is_read")
+  readAt    DateTime?        @map("read_at")
+  createdAt DateTime         @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([isRead])
+  @@map("notifications")
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ПРОГРАММА ЛОЯЛЬНОСТИ
+// ═══════════════════════════════════════════════════════════════
+
+model LoyaltyAccount {
+  id           String   @id @default(uuid())
+  userId       String   @unique @map("user_id")
+  points       Int      @default(0)
+  totalEarned  Int      @default(0) @map("total_earned")
+  totalSpent   Int      @default(0) @map("total_spent")
+  level        String   @default("bronze") // bronze | silver | gold | platinum
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  user         User              @relation(fields: [userId], references: [id])
+  transactions LoyaltyTransaction[]
+
+  @@map("loyalty_accounts")
+}
+
+model LoyaltyTransaction {
+  id          String   @id @default(uuid())
+  accountId   String   @map("account_id")
+  points      Int      // Положительное = начисление, отрицательное = списание
+  type        String   // earn | spend | expire | bonus
+  description String?
+  orderId     String?  @map("order_id")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  account LoyaltyAccount @relation(fields: [accountId], references: [id])
+
+  @@index([accountId])
+  @@map("loyalty_transactions")
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ИНВЕНТАРЬ
+// ═══════════════════════════════════════════════════════════════
+
+model Inventory {
+  id           String   @id @default(uuid())
+  branchId     String   @map("branch_id")
+  menuItemId   String?  @map("menu_item_id")
+  name         String
+  unit         String   // кг, л, шт
+  quantity     Float
+  minQuantity  Float    @map("min_quantity")  // Минимальный остаток
+  costPerUnit  Int      @map("cost_per_unit") // Цена за единицу
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  branch   Branch    @relation(fields: [branchId], references: [id])
+  menuItem MenuItem? @relation(fields: [menuItemId], references: [id])
+
+  @@index([branchId])
+  @@map("inventory")
+}
+
+// ═══════════════════════════════════════════════════════════════
+// СМЕНЫ СОТРУДНИКОВ
+// ═══════════════════════════════════════════════════════════════
+
+model StaffShift {
+  id          String           @id @default(uuid())
+  userId      String           @map("user_id")
+  branchId    String           @map("branch_id")
+  startTime   DateTime         @map("start_time")
+  endTime     DateTime?        @map("end_time")
+  status      StaffShiftStatus @default(active)
+  hoursWorked Float?           @map("hours_worked")
+  note        String?
+  createdAt   DateTime         @default(now()) @map("created_at")
+
+  user   User   @relation(fields: [userId], references: [id])
+  branch Branch @relation(fields: [branchId], references: [id])
+
+  @@index([userId])
+  @@index([branchId])
+  @@map("staff_shifts")
+}
+
+// ═══════════════════════════════════════════════════════════════
+// НАСТРОЙКИ СИСТЕМЫ
+// ═══════════════════════════════════════════════════════════════
+
+model SystemSetting {
+  id        String   @id @default(uuid())
+  key       String   @unique
+  value     String
+  type      String   @default("string") // string | number | boolean | json
+  group     String   @default("general")
+  label     String?
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("system_settings")
+}
+
+// ─── Настройки Telegram бота ─────────────────────────────────
+
+model TelegramBot {
+  id            String   @id @default(uuid())
+  botToken      String   @map("bot_token")
+  adminChatId   String?  @map("admin_chat_id")
+  kitchenChatId String?  @map("kitchen_chat_id")
+  isActive      Boolean  @default(true) @map("is_active")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  @@map("telegram_bot")
+}
+
+// ═══════════════════════════════════════════════════════════════
+// АНАЛИТИКА И ОТЧЁТЫ
+// ═══════════════════════════════════════════════════════════════
+
+model DailyReport {
+  id              String   @id @default(uuid())
+  branchId        String?  @map("branch_id")
+  date            DateTime
+  totalOrders     Int      @default(0) @map("total_orders")
+  completedOrders Int      @default(0) @map("completed_orders")
+  cancelledOrders Int      @default(0) @map("cancelled_orders")
+  revenue         Int      @default(0)
+  avgCheck        Int      @default(0) @map("avg_check")
+  newCustomers    Int      @default(0) @map("new_customers")
+  repeatCustomers Int      @default(0) @map("repeat_customers")
+  deliveryOrders  Int      @default(0) @map("delivery_orders")
+  pickupOrders    Int      @default(0) @map("pickup_orders")
+  dineInOrders    Int      @default(0) @map("dine_in_orders")
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  @@unique([branchId, date])
+  @@index([date])
+  @@map("daily_reports")
+}
+
+// ─── Популярность блюд ───────────────────────────────────────
+
+model MenuItemStat {
+  id           String   @id @default(uuid())
+  menuItemId   String   @map("menu_item_id")
+  branchId     String?  @map("branch_id")
+  date         DateTime
+  ordersCount  Int      @default(0) @map("orders_count")
+  revenue      Int      @default(0)
+  avgRating    Float?   @map("avg_rating")
+
+  @@unique([menuItemId, branchId, date])
+  @@map("menu_item_stats")
+}

@@ -1,0 +1,28 @@
+{
+  "nav": {
+    "dashboard": "Dashboard", "orders": "Orders", "menu": "Menu",
+    "branches": "Branches", "analytics": "Analytics",
+    "finance": "Finance", "staff": "Staff", "promos": "Promotions"
+  },
+  "dashboard": {
+    "title": "Dashboard", "todayRevenue": "Today Revenue", "todayOrders": "Today Orders",
+    "avgCheck": "Avg. Check", "weekRevenue": "This Week",
+    "revenueChart": "Revenue for 7 days", "topItems": "Top Items",
+    "recentOrders": "Recent Orders", "byBranch": "By Branch",
+    "openSite": "Open Website", "logout": "Sign Out"
+  },
+  "orders": {
+    "title": "Order Management",
+    "id": "ID", "client": "Client", "amount": "Amount",
+    "type": "Type", "status": "Status", "time": "Time", "actions": "Actions",
+    "delivery": "Delivery", "pickup": "Pickup",
+    "advance": "Advance", "cancelOrder": "Cancel", "refresh": "Refresh",
+    "search": "Search by ID or name..."
+  },
+  "finance": {
+    "title": "Finance", "income": "Income", "expense": "Expense", "profit": "Profit",
+    "add": "Add", "type": "Type", "category": "Category",
+    "amount": "Amount", "description": "Description", "branch": "Branch",
+    "date": "Date", "all": "All", "incomes": "Income", "expenses": "Expenses"
+  }
+}

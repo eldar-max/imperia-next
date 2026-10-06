@@ -1,0 +1,21 @@
+{
+  "name": "Империя Пицца — Доставка и Рестораны",
+  "short_name": "Империя Пицца",
+  "description": "Заказывайте пиццу онлайн. Быстрая доставка, бронирование столиков.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#080808",
+  "theme_color": "#D32F2F",
+  "lang": "ru",
+  "categories": ["food", "lifestyle"],
+  "icons": [
+    { "src": "/icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    { "name": "Меню", "short_name": "Меню", "url": "/menu", "icons": [{ "src": "/icons/icon.svg", "sizes": "any" }] },
+    { "name": "Заказать", "short_name": "Заказ", "url": "/cart", "icons": [{ "src": "/icons/icon.svg", "sizes": "any" }] },
+    { "name": "Бронирование", "short_name": "Бронь", "url": "/booking", "icons": [{ "src": "/icons/icon.svg", "sizes": "any" }] }
+  ]
+}

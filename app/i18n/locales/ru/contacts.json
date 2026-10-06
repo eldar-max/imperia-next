@@ -1,0 +1,11 @@
+{
+  "hero": { "tag": "МЫ ВЕЗДЕ", "title": "Наши рестораны", "subtitle": "филиала по всему городу" },
+  "contact": { "title": "Свяжитесь с нами", "phone": "Телефон", "email": "Email", "telegram": "Telegram", "instagram": "Instagram" },
+  "feedback": {
+    "title": "Обратная связь",
+    "name": "Имя", "phone": "Телефон", "message": "Сообщение",
+    "placeholder": "Ваш вопрос или предложение...",
+    "submit": "Отправить сообщение",
+    "success": { "title": "Отправлено!", "subtitle": "Ответим в течение 24 часов", "again": "Написать ещё" }
+  }
+}

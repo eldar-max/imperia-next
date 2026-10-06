@@ -1,0 +1,9 @@
+{
+  "hero": { "tag": "OUR MENU", "title": "Choose Yours", "subtitle": "items · Fresh ingredients · Original recipes" },
+  "search": { "placeholder": "Search the menu..." },
+  "categories": { "all": "All", "pizza": "Pizza", "snacks": "Snacks", "desserts": "Desserts", "drinks": "Drinks", "sauces": "Sauces", "combos": "Combos" },
+  "badges": { "hit": "Hit", "new": "New", "veg": "Veg" },
+  "card": { "weight": "Weight", "calories": "kcal", "rating": "Rating", "addToCart": "Add to Cart" },
+  "empty": { "title": "Nothing found", "subtitle": "Try changing the filters" },
+  "modal": { "extras": "Add to order", "qty": "Quantity", "total": "Total" }
+}

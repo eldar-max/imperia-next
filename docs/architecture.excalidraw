@@ -1,0 +1,74 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://excalidraw.com",
+  "elements": [
+    {
+      "id": "title",
+      "type": "text",
+      "x": 400, "y": 20,
+      "width": 400, "height": 40,
+      "text": "Империя Пицца — Архитектура платформы",
+      "fontSize": 24, "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#D32F2F",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 2,
+      "roughness": 0, "opacity": 100
+    },
+
+    { "id": "client_box", "type": "rectangle", "x": 50, "y": 100, "width": 220, "height": 300, "strokeColor": "#1971c2", "backgroundColor": "#d0ebff", "fillStyle": "solid", "strokeWidth": 2, "roughness": 0, "opacity": 100 },
+    { "id": "client_title", "type": "text", "x": 100, "y": 110, "width": 120, "height": 24, "text": "КЛИЕНТЫ", "fontSize": 16, "fontFamily": 1, "strokeColor": "#1971c2", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+    { "id": "web", "type": "rectangle", "x": 70, "y": 145, "width": 180, "height": 35, "strokeColor": "#1971c2", "backgroundColor": "#a5d8ff", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+    { "id": "web_txt", "type": "text", "x": 100, "y": 153, "width": 120, "height": 20, "text": "🌐 Веб-сайт (Next.js)", "fontSize": 13, "fontFamily": 1, "strokeColor": "#1971c2", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+    { "id": "pwa", "type": "rectangle", "x": 70, "y": 190, "width": 180, "height": 35, "strokeColor": "#1971c2", "backgroundColor": "#a5d8ff", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+    { "id": "pwa_txt", "type": "text", "x": 110, "y": 198, "width": 100, "height": 20, "text": "📱 PWA приложение", "fontSize": 13, "fontFamily": 1, "strokeColor": "#1971c2", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+    { "id": "tg", "type": "rectangle", "x": 70, "y": 235, "width": 180, "height": 35, "strokeColor": "#1971c2", "backgroundColor": "#a5d8ff", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+    { "id": "tg_txt", "type": "text", "x": 100, "y": 243, "width": 120, "height": 20, "text": "✈️ Telegram-бот", "fontSize": 13, "fontFamily": 1, "strokeColor": "#1971c2", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+    { "id": "admin", "type": "rectangle", "x": 70, "y": 280, "width": 180, "height": 35, "strokeColor": "#1971c2", "backgroundColor": "#a5d8ff", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+    { "id": "admin_txt", "type": "text", "x": 100, "y": 288, "width": 120, "height": 20, "text": "⚙️ Админ панель", "fontSize": 13, "fontFamily": 1, "strokeColor": "#1971c2", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+    { "id": "kitchen", "type": "rectangle", "x": 70, "y": 325, "width": 180, "height": 35, "strokeColor": "#1971c2", "backgroundColor": "#a5d8ff", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+    { "id": "kitchen_txt", "type": "text", "x": 90, "y": 333, "width": 140, "height": 20, "text": "👨‍🍳 Кухня / Курьер", "fontSize": 13, "fontFamily": 1, "strokeColor": "#1971c2", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+
+    { "id": "api_box", "type": "rectangle", "x": 380, "y": 100, "width": 220, "height": 300, "strokeColor": "#2f9e44", "backgroundColor": "#d3f9d8", "fillStyle": "solid", "strokeWidth": 2, "roughness": 0, "opacity": 100 },
+    { "id": "api_title", "type": "text", "x": 420, "y": 110, "width": 140, "height": 24, "text": "BACKEND API", "fontSize": 16, "fontFamily": 1, "strokeColor": "#2f9e44", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+    { "id": "nextapi", "type": "rectangle", "x": 400, "y": 145, "width": 180, "height": 35, "strokeColor": "#2f9e44", "backgroundColor": "#8ce99a", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+    { "id": "nextapi_txt", "type": "text", "x": 415, "y": 153, "width": 150, "height": 20, "text": "Next.js API Routes", "fontSize": 13, "fontFamily": 1, "strokeColor": "#2f9e44", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+    { "id": "auth_r", "type": "rectangle", "x": 400, "y": 190, "width": 180, "height": 30, "strokeColor": "#2f9e44", "backgroundColor": "#8ce99a", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+    { "id": "auth_txt", "type": "text", "x": 430, "y": 197, "width": 120, "height": 18, "text": "POST /api/auth", "fontSize": 12, "fontFamily": 1, "strokeColor": "#2f9e44", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+    { "id": "orders_r", "type": "rectangle", "x": 400, "y": 228, "width": 180, "height": 30, "strokeColor": "#2f9e44", "backgroundColor": "#8ce99a", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+    { "id": "orders_txt", "type": "text", "x": 420, "y": 235, "width": 140, "height": 18, "text": "POST /api/orders", "fontSize": 12, "fontFamily": 1, "strokeColor": "#2f9e44", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+    { "id": "menu_r", "type": "rectangle", "x": 400, "y": 266, "width": 180, "height": 30, "strokeColor": "#2f9e44", "backgroundColor": "#8ce99a", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+    { "id": "menu_txt", "type": "text", "x": 430, "y": 273, "width": 120, "height": 18, "text": "GET /api/menu", "fontSize": 12, "fontFamily": 1, "strokeColor": "#2f9e44", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+    { "id": "booking_r", "type": "rectangle", "x": 400, "y": 304, "width": 180, "height": 30, "strokeColor": "#2f9e44", "backgroundColor": "#8ce99a", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+    { "id": "booking_txt", "type": "text", "x": 415, "y": 311, "width": 150, "height": 18, "text": "POST /api/bookings", "fontSize": 12, "fontFamily": 1, "strokeColor": "#2f9e44", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+    { "id": "tgapi_r", "type": "rectangle", "x": 400, "y": 342, "width": 180, "height": 30, "strokeColor": "#2f9e44", "backgroundColor": "#8ce99a", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+    { "id": "tgapi_txt", "type": "text", "x": 415, "y": 349, "width": 150, "height": 18, "text": "Telegram Bot API", "fontSize": 12, "fontFamily": 1, "strokeColor": "#2f9e44", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+
+    { "id": "db_box", "type": "rectangle", "x": 710, "y": 100, "width": 220, "height": 300, "strokeColor": "#862e9c", "backgroundColor": "#f3d9fa", "fillStyle": "solid", "strokeWidth": 2, "roughness": 0, "opacity": 100 },
+    { "id": "db_title", "type": "text", "x": 760, "y": 110, "width": 120, "height": 24, "text": "БАЗА ДАННЫХ", "fontSize": 16, "fontFamily": 1, "strokeColor": "#862e9c", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+    { "id": "neon", "type": "rectangle", "x": 730, "y": 145, "width": 180, "height": 35, "strokeColor": "#862e9c", "backgroundColor": "#e599f7", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+    { "id": "neon_txt", "type": "text", "x": 760, "y": 153, "width": 120, "height": 20, "text": "🐘 Neon PostgreSQL", "fontSize": 13, "fontFamily": 1, "strokeColor": "#862e9c", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+    { "id": "prisma", "type": "rectangle", "x": 730, "y": 190, "width": 180, "height": 35, "strokeColor": "#862e9c", "backgroundColor": "#e599f7", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+    { "id": "prisma_txt", "type": "text", "x": 770, "y": 198, "width": 100, "height": 20, "text": "Prisma ORM", "fontSize": 13, "fontFamily": 1, "strokeColor": "#862e9c", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+    { "id": "firebase", "type": "rectangle", "x": 730, "y": 235, "width": 180, "height": 35, "strokeColor": "#862e9c", "backgroundColor": "#e599f7", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+    { "id": "firebase_txt", "type": "text", "x": 755, "y": 243, "width": 130, "height": 20, "text": "🔥 Firebase Auth", "fontSize": 13, "fontFamily": 1, "strokeColor": "#862e9c", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+    { "id": "tables", "type": "rectangle", "x": 730, "y": 280, "width": 180, "height": 100, "strokeColor": "#862e9c", "backgroundColor": "#e599f7", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+    { "id": "tables_txt", "type": "text", "x": 745, "y": 290, "width": 150, "height": 80, "text": "Таблицы:\nusers, branches\nmenu_items, orders\nbookings, promotions\ntransactions, reviews", "fontSize": 11, "fontFamily": 1, "strokeColor": "#862e9c", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+
+    { "id": "roles_box", "type": "rectangle", "x": 50, "y": 440, "width": 880, "height": 120, "strokeColor": "#e67700", "backgroundColor": "#fff3bf", "fillStyle": "solid", "strokeWidth": 2, "roughness": 0, "opacity": 100 },
+    { "id": "roles_title", "type": "text", "x": 400, "y": 450, "width": 200, "height": 24, "text": "РОЛИ ПОЛЬЗОВАТЕЛЕЙ", "fontSize": 16, "fontFamily": 1, "strokeColor": "#e67700", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+    { "id": "roles_txt", "type": "text", "x": 70, "y": 480, "width": 840, "height": 60, "text": "👑 founder (Основатель)   |   👨‍💼 admin (Администратор)   |   🏪 branch_manager (Менеджер филиала)   |   👨‍🍳 kitchen (Кухня)\n🚗 courier (Курьер)   |   🚦 delivery_manager (Диспетчер)   |   🧾 waiter (Официант)   |   💰 cashier (Кассир)   |   👤 customer (Клиент)", "fontSize": 12, "fontFamily": 1, "strokeColor": "#e67700", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+
+    { "id": "stack_box", "type": "rectangle", "x": 50, "y": 590, "width": 880, "height": 100, "strokeColor": "#495057", "backgroundColor": "#f8f9fa", "fillStyle": "solid", "strokeWidth": 2, "roughness": 0, "opacity": 100 },
+    { "id": "stack_title", "type": "text", "x": 420, "y": 600, "width": 160, "height": 24, "text": "ТЕХНОЛОГИИ", "fontSize": 16, "fontFamily": 1, "strokeColor": "#495057", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+    { "id": "stack_txt", "type": "text", "x": 70, "y": 628, "width": 840, "height": 50, "text": "Next.js 16   |   React 19   |   Tailwind CSS   |   Framer Motion   |   Prisma   |   PostgreSQL (Neon)   |   Firebase Auth   |   Telegram Bot API   |   Recharts", "fontSize": 12, "fontFamily": 1, "strokeColor": "#495057", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 1, "roughness": 0, "opacity": 100 },
+
+    { "id": "arr1", "type": "arrow", "x": 270, "y": 250, "width": 110, "height": 0, "strokeColor": "#495057", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 2, "roughness": 0, "opacity": 100, "startArrowhead": null, "endArrowhead": "arrow" },
+    { "id": "arr2", "type": "arrow", "x": 600, "y": 250, "width": 110, "height": 0, "strokeColor": "#495057", "backgroundColor": "transparent", "fillStyle": "solid", "strokeWidth": 2, "roughness": 0, "opacity": 100, "startArrowhead": null, "endArrowhead": "arrow" }
+  ],
+  "appState": {
+    "gridSize": null,
+    "viewBackgroundColor": "#ffffff"
+  }
+}
