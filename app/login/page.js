@@ -98,7 +98,7 @@ export default function LoginPage() {
         toast.success('Добро пожаловать!')
         
         // Проверяем, является ли пользователь админом
-        const adminEmails = ['admin@imperia.com', 'founder@imperia.com']
+        const adminEmails = ['admin@imperia.com', 'founder@imperia.com', 'isabekoveldat@gmail.com']
         if (adminEmails.includes(form.email.toLowerCase())) {
           router.push('/admin/verify')
         } else {
@@ -127,7 +127,7 @@ export default function LoginPage() {
       toast.success(`Добро пожаловать, ${cred.user.displayName}!`)
       
       // Проверяем, является ли пользователь админом
-      const adminEmails = ['admin@imperia.com', 'founder@imperia.com']
+      const adminEmails = ['admin@imperia.com', 'founder@imperia.com', 'isabekoveldat@gmail.com']
       if (adminEmails.includes(cred.user.email?.toLowerCase())) {
         router.push('/admin/verify')
       } else {
