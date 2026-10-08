@@ -1,5 +1,6 @@
 /**
- * Telegram бот для отправки кодов подтверждения админам
+ * Telegram бот для входа в админку
+ * Простой вход через код
  */
 
 const https = require('https')
@@ -7,8 +8,8 @@ const https = require('https')
 const TOKEN = process.env.TELEGRAM_BOT_TOKEN || '8876197155:AAHHIYoEyFtk3qBS94ONfs2zfYa_lD8OoG8'
 const API = `https://api.telegram.org/bot${TOKEN}`
 
-// Хранилище связей email -> chat_id
-const adminChats = new Map()
+// Глобальное хранилище кодов
+global.adminLoginCodes = global.adminLoginCodes || new Map()
 
 // HTTP запрос к Telegram API
 function apiCall(method, body = {}) {
@@ -36,73 +37,45 @@ const send = (chatId, text, extra = {}) =>
 // Обработка /start
 async function handleStart(chatId, username) {
   await send(chatId, 
-    `👋 <b>Добро пожаловать в систему подтверждения Империя Пицца</b>\n\n` +
-    `Этот бот отправляет коды подтверждения для входа в админ-панель.\n\n` +
-    `🔐 Для привязки аккаунта используйте команду:\n` +
-    `<code>/link ваш@email.com</code>\n\n` +
-    `Пример: <code>/link admin@imperia.com</code>`
+    `👋 <b>Добро пожаловать в Империя Пицца!</b>\n\n` +
+    `Этот бот для входа в админ-панель.\n\n` +
+    `🔐 <b>Команда:</b>\n` +
+    `<code>/admin</code> — получить код для входа`
   )
 }
 
-// Обработка /link email
-async function handleLink(chatId, email, username) {
-  if (!email || !email.includes('@')) {
-    await send(chatId, '❌ Неверный формат email\n\nИспользуйте: /link admin@imperia.com')
-    return
-  }
+// Обработка /admin - генерация кода
+async function handleAdmin(chatId, username) {
+  // Генерируем код
+  const code = Math.floor(100000 + Math.random() * 900000).toString()
+  
+  // Сохраняем в глобальное хранилище
+  global.adminLoginCodes.set(code, {
+    chatId: chatId,
+    username: username,
+    expiresAt: Date.now() + 10 * 60 * 1000, // 10 минут
+    used: false
+  })
 
-  // Проверяем, является ли email администратором
-  const adminEmails = ['admin@imperia.com', 'founder@imperia.com']
-  if (!adminEmails.includes(email.toLowerCase())) {
-    await send(chatId, '❌ У этого email нет прав администратора')
-    return
-  }
+  // Автоудаление через 10 минут
+  setTimeout(() => {
+    global.adminLoginCodes.delete(code)
+  }, 10 * 60 * 1000)
 
-  adminChats.set(email, chatId)
-  console.log(`[Bot] Email ${email} привязан к chat_id ${chatId}`)
+  console.log(`[Bot] 🔐 Код ${code} для @${username} (chat: ${chatId})`)
 
   await send(chatId, 
-    `✅ <b>Аккаунт успешно привязан!</b>\n\n` +
-    `📧 Email: <code>${email}</code>\n` +
-    `💬 Chat ID: <code>${chatId}</code>\n\n` +
-    `Теперь коды подтверждения будут приходить сюда.`
+    `🔐 <b>Ваш код для входа в админку</b>\n\n` +
+    `<code>${code}</code>\n\n` +
+    `⏱ Действителен 10 минут\n` +
+    `🌐 Откройте: http://localhost:3000/admin/login`
   )
-}
-
-// Отправка кода (вызывается из API)
-async function sendCode(email, code) {
-  console.log(`[Bot] Попытка отправить код для ${email}`)
-  console.log(`[Bot] Текущие привязки:`, Array.from(adminChats.entries()))
-  
-  const chatId = adminChats.get(email)
-  if (!chatId) {
-    console.log(`[Bot] ❌ Chat ID для ${email} не найден`)
-    console.log(`[Bot] Доступные email:`, Array.from(adminChats.keys()))
-    return false
-  }
-
-  console.log(`[Bot] ✓ Chat ID найден: ${chatId}`)
-  
-  try {
-    await send(chatId, 
-      `🔐 <b>Код подтверждения для входа в админку</b>\n\n` +
-      `<code>${code}</code>\n\n` +
-      `⏱ Действителен 10 минут\n` +
-      `🔒 Используйте только один раз`
-    )
-    console.log(`[Bot] ✅ Код ${code} отправлен в chat ${chatId} для ${email}`)
-    return true
-  } catch (err) {
-    console.error('[Bot] ❌ Ошибка отправки кода:', err.message)
-    return false
-  }
 }
 
 // Long Polling
 let offset = 0
 
 async function poll() {
-  console.log(`[Bot] Polling... offset=${offset}`)
   try {
     const res = await apiCall('getUpdates', { 
       offset, 
@@ -110,34 +83,29 @@ async function poll() {
       allowed_updates: ['message'] 
     })
 
-    console.log(`[Bot] Ответ:`, res.ok ? `OK, ${res.result?.length || 0} сообщений` : res.description)
-
     if (res.ok && res.result?.length) {
-      console.log(`[Bot] Получено ${res.result.length} новых сообщений`)
       for (const upd of res.result) {
         offset = upd.update_id + 1
-        console.log(`[Bot] Update ID: ${upd.update_id}`)
 
         const msg = upd.message
         if (!msg?.text) continue
 
         const chatId = msg.chat.id
         const text = msg.text.trim()
-        const username = msg.from?.username
+        const username = msg.from?.username || 'user'
 
-        console.log(`[Bot] 📨 Получено: "${text}" от @${username} (chat ${chatId})`)
+        console.log(`[Bot] 📨 "${text}" от @${username}`)
 
         if (text === '/start') {
           await handleStart(chatId, username)
-        } else if (text.startsWith('/link ')) {
-          const email = text.replace('/link ', '').trim()
-          await handleLink(chatId, email, username)
+        } else if (text === '/admin') {
+          await handleAdmin(chatId, username)
         } else {
           await send(chatId, 
             '❓ Неизвестная команда\n\n' +
-            'Доступные команды:\n' +
-            '/start — информация о боте\n' +
-            '/link email — привязать аккаунт'
+            '<b>Доступные команды:</b>\n' +
+            '/start — информация\n' +
+            '/admin — получить код для входа'
           )
         }
       }
@@ -156,12 +124,12 @@ apiCall('getMe').then(res => {
     console.log(`✅ Бот запущен: @${res.result.username}`)
     console.log('📋 Команды:')
     console.log('   /start — информация')
-    console.log('   /link email — привязать email к Telegram')
+    console.log('   /admin — получить код для входа в админку')
     poll()
   } else {
     console.error('❌ Ошибка токена:', res.description)
   }
 }).catch(e => console.error('❌ Ошибка подключения:', e.message))
 
-// Экспорт функции для отправки кодов
-module.exports = { sendCode, adminChats }
+// Экспорт для использования в Next.js API
+module.exports = { adminLoginCodes: global.adminLoginCodes }
