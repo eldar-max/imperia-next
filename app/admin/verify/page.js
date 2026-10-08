@@ -73,6 +73,7 @@ export default function AdminVerifyPage() {
         const now = Date.now()
         document.cookie = `adminVerified=true; path=/; max-age=3600; SameSite=Strict`
         document.cookie = `adminVerifiedAt=${now}; path=/; max-age=3600; SameSite=Strict`
+        document.cookie = `adminRole=admin; path=/; max-age=3600; SameSite=Strict`
         
         console.log('✅ Cookies установлены:', document.cookie)
         console.log('✅ Перенаправление на /admin...')

@@ -26,10 +26,11 @@ export default function AdminLoginPage() {
       if (res.ok) {
         toast.success('Добро пожаловать в админку!')
         
-        // Сохраняем сессию
+        // Сохраняем сессию администратора
         const now = Date.now()
         document.cookie = `adminVerified=true; path=/; max-age=3600; SameSite=Strict`
         document.cookie = `adminVerifiedAt=${now}; path=/; max-age=3600; SameSite=Strict`
+        document.cookie = `adminRole=admin; path=/; max-age=3600; SameSite=Strict`
         
         setTimeout(() => {
           router.push('/admin')

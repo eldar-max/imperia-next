@@ -40,9 +40,15 @@ export async function POST(request) {
 
       console.log(`[API] ✅ Код ${code} подтверждён для @${stored.username}`)
 
+      // Возвращаем информацию об администраторе
       return NextResponse.json({
         success: true,
         message: 'Код подтверждён',
+        admin: {
+          email: 'admin@imperia.com', // Пока захардкодим
+          role: 'admin',
+          username: stored.username,
+        }
       })
     }
 
