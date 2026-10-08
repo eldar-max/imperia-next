@@ -93,7 +93,7 @@ export default function AdminLoginPage() {
           
           <div>
             <label style={{ display:'block', fontSize:13, fontWeight:600, color:'#808080', marginBottom:10 }}>
-              Введите 6-значный код
+              Введите 6-значный код {code.length > 0 && `(${code.length}/6)`}
             </label>
             <input
               type="text"
