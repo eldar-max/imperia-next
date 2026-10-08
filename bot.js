@@ -4,12 +4,10 @@
  */
 
 const https = require('https')
+const { saveCode } = require('./lib/codeStorage')
 
 const TOKEN = process.env.TELEGRAM_BOT_TOKEN || '8876197155:AAHHIYoEyFtk3qBS94ONfs2zfYa_lD8OoG8'
 const API = `https://api.telegram.org/bot${TOKEN}`
-
-// Глобальное хранилище кодов
-global.adminLoginCodes = global.adminLoginCodes || new Map()
 
 // HTTP запрос к Telegram API
 function apiCall(method, body = {}) {
@@ -49,8 +47,8 @@ async function handleAdmin(chatId, username) {
   // Генерируем код
   const code = Math.floor(100000 + Math.random() * 900000).toString()
   
-  // Сохраняем в глобальное хранилище
-  global.adminLoginCodes.set(code, {
+  // Сохраняем в файловое хранилище
+  saveCode(code, {
     chatId: chatId,
     username: username,
     expiresAt: Date.now() + 10 * 60 * 1000, // 10 минут
@@ -59,7 +57,8 @@ async function handleAdmin(chatId, username) {
 
   // Автоудаление через 10 минут
   setTimeout(() => {
-    global.adminLoginCodes.delete(code)
+    const { deleteCode } = require('./lib/codeStorage')
+    deleteCode(code)
   }, 10 * 60 * 1000)
 
   console.log(`[Bot] 🔐 Код ${code} для @${username} (chat: ${chatId})`)
@@ -132,4 +131,4 @@ apiCall('getMe').then(res => {
 }).catch(e => console.error('❌ Ошибка подключения:', e.message))
 
 // Экспорт для использования в Next.js API
-module.exports = { adminLoginCodes: global.adminLoginCodes }
+module.exports = {}

@@ -13,14 +13,10 @@ export async function POST(request) {
         return NextResponse.json({ error: 'Код обязателен' }, { status: 400 })
       }
 
-      // Получаем хранилище кодов из бота
-      const codes = global.adminLoginCodes
-
-      if (!codes) {
-        return NextResponse.json({ error: 'Бот не запущен' }, { status: 500 })
-      }
-
-      const stored = codes.get(code)
+      // Динамический импорт для Node.js модуля
+      const { getCode, deleteCode } = await import('@/lib/codeStorage.js')
+      
+      const stored = getCode(code)
 
       if (!stored) {
         console.log(`[API] ❌ Код ${code} не найден`)
@@ -29,19 +25,18 @@ export async function POST(request) {
 
       if (stored.used) {
         console.log(`[API] ❌ Код ${code} уже использован`)
-        codes.delete(code)
+        deleteCode(code)
         return NextResponse.json({ error: 'Код уже использован' }, { status: 401 })
       }
 
       if (Date.now() > stored.expiresAt) {
         console.log(`[API] ❌ Код ${code} истёк`)
-        codes.delete(code)
+        deleteCode(code)
         return NextResponse.json({ error: 'Код истёк (10 минут прошло)' }, { status: 401 })
       }
 
-      // Помечаем код как использованный
-      stored.used = true
-      codes.delete(code)
+      // Удаляем код после успешной проверки
+      deleteCode(code)
 
       console.log(`[API] ✅ Код ${code} подтверждён для @${stored.username}`)
 
