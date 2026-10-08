@@ -60,7 +60,7 @@ export default function AdminVerifyPage() {
     }
     setLoading(true)
     try {
-      const res = await fetch('/api/admin/verify-code', {
+      const res = await fetch('/api/admin/login-code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: user.email, code, action: 'verify' }),
