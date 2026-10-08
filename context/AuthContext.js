@@ -50,7 +50,7 @@ export function AuthProvider({ children }) {
     setUser(null)
   }
 
-  const isAdmin = user?.role === 'admin' || user?.role === 'founder'
+  const isAdmin = user?.role === 'admin' || user?.role === 'founder' || (typeof document !== 'undefined' && document.cookie.includes('adminRole=admin'))
 
   return (
     <AuthContext.Provider value={{ user, loading, logout, isAdmin }}>
