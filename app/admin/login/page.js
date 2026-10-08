@@ -15,15 +15,24 @@ export default function AdminLoginPage() {
       toast.error('Код должен содержать 6 цифр')
       return
     }
+    
+    console.log('🔐 Отправка кода:', code)
     setLoading(true)
+    
     try {
       const res = await fetch('/api/admin/login-code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ code, action: 'verify' }),
       })
+      
+      console.log('📡 Ответ сервера:', res.status)
+      
       const data = await res.json()
+      console.log('📦 Данные:', data)
+      
       if (res.ok) {
+        console.log('✅ Успех!')
         toast.success('Добро пожаловать в админку!')
         
         // Сохраняем сессию администратора
@@ -32,14 +41,19 @@ export default function AdminLoginPage() {
         document.cookie = `adminVerifiedAt=${now}; path=/; max-age=3600; SameSite=Strict`
         document.cookie = `adminRole=admin; path=/; max-age=3600; SameSite=Strict`
         
+        console.log('🍪 Cookies:', document.cookie)
+        
         setTimeout(() => {
+          console.log('🚀 Переход на /admin')
           router.push('/admin')
         }, 100)
       } else {
+        console.log('❌ Ошибка:', data.error)
         toast.error(data.error || 'Неверный код')
         setCode('')
       }
     } catch (err) {
+      console.error('💥 Ошибка запроса:', err)
       toast.error('Ошибка сети')
     } finally {
       setLoading(false)
