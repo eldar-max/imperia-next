@@ -7,10 +7,10 @@ import Footer from '@/components/layout/Footer'
 import { IconClock, IconStar, IconTruck, IconShield, IconArrow, IconBuilding, IconHistory, IconChef, IconQuote, IconPhone, IconMail, IconInstagram, IconTelegram, IconGift, IconMap } from '@/components/ui/Icons'
 
 const POPULAR = [
-  { id:1, name:'Маргарита',   price:49000, rating:4.8, time:'25 мин', type:'pizza', img:'https://avatars.mds.yandex.net/get-altay/19593321/2a0000019e68c80c46cf6503c2ea8da4ca4a/orig' },
-  { id:2, name:'Пепперони',   price:59000, rating:4.9, time:'25 мин', type:'pizza', img:'https://cdn.dodostatic.net/static/Img/Products/45cc8ffb190c4a28aaf1863a67f675c7_1875x1875.jpeg' },
-  { id:3, name:'4 сыра',      price:65000, rating:4.7, time:'30 мин', type:'pizza', img:'https://i.kafushka.ru/i/16/90/169093cd6b526e06b2a9cd1682799a07.jpg' },
-  { id:4, name:'Мясной микс', price:75000, rating:4.9, time:'30 мин', type:'pizza', img:'https://eda.yandex/images/15282095/ac60909a18a74d83a3b6472c25488d61-400x400nocrop.jpeg' },
+  { id:1, name:'Брусничный Бум',   price:49000, rating:4.8, time:'25 мин', type:'pizza', img:'https://image.vsem-edu-oblako.ru/upload/store/merchant5838/31edb647a9c9a8951a5bde726ea696d7.png?w=900&h=675' },
+  { id:2, name:'Пицца Том Ям с цыпленком',   price:59000, rating:4.9, time:'30 мин', type:'pizza', img:'https://img-api.yumapos.ru/image/crop/original/e591dca5-0d50-9acf-38d3-b30c7797e62d.png' },
+  { id:3, name:'Пицца Том Ям с креветками',      price:65000, rating:4.9, time:'30 мин', type:'pizza', img:'https://avatars.mds.yandex.net/get-eda/13439948/058ca8b3f1a44667adda4f2b42903f88/M_height' },
+  { id:4, name:'Четыре сыра', price:75000, rating:4.7, time:'25 мин', type:'pizza', img:'https://img-api.yumapos.ru/image/crop/original/e591dca5-0d50-9acf-38d3-b30c7797e62d.png' },
 ]
 
 export default function Home() {
@@ -119,7 +119,7 @@ export default function Home() {
               {/* Главное фото */}
               <div style={{ position:'relative', borderRadius:32, overflow:'hidden', boxShadow:'0 32px 80px rgba(0,0,0,0.8)' }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="https://avatars.mds.yandex.net/get-altay/19593321/2a0000019e68c80c46cf6503c2ea8da4ca4a/orig" alt="Пицца"
+                <img src="https://image.vsem-edu-oblako.ru/upload/store/merchant5838/31edb647a9c9a8951a5bde726ea696d7.png?w=900&h=675" alt="Пицца"
                   style={{ width:'100%', height:580, objectFit:'cover', display:'block' }}/>
                 <div style={{ position:'absolute', inset:0, background:'linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.4) 100%)' }}/>
               </div>
@@ -240,7 +240,7 @@ export default function Home() {
             </Link>
           </div>
 
-          <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:28 }}>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:32 }}>
             {POPULAR.map((p,i) => (
               <motion.div 
                 key={p.id}
@@ -248,43 +248,48 @@ export default function Home() {
                 whileInView={{ opacity:1, y:0 }} 
                 viewport={{ once:true }}
                 transition={{ delay:i*0.1 }}
-                style={{ borderRadius:24, overflow:'hidden', background:'rgba(255,255,255,0.02)', border:'1px solid rgba(255,255,255,0.06)', transition:'all .4s', cursor:'pointer' }}
-                onMouseEnter={e=>{e.currentTarget.style.transform='translateY(-12px)';e.currentTarget.style.borderColor='rgba(211,47,47,0.3)';e.currentTarget.style.boxShadow='0 24px 60px rgba(0,0,0,0.8)'}}
-                onMouseLeave={e=>{e.currentTarget.style.transform='translateY(0)';e.currentTarget.style.borderColor='rgba(255,255,255,0.06)';e.currentTarget.style.boxShadow='none'}}>
+                style={{ background:'#0a0a0a', borderRadius:20, padding:'32px 20px 24px', transition:'all .3s', cursor:'pointer', position:'relative' }}
+                onMouseEnter={e=>{e.currentTarget.style.transform='translateY(-8px)';e.currentTarget.style.background='#111'}}
+                onMouseLeave={e=>{e.currentTarget.style.transform='translateY(0)';e.currentTarget.style.background='#0a0a0a'}}>
                 
-                <div style={{ position:'relative', overflow:'hidden' }}>
-                  <div style={{ width:'100%', height:240, display:'flex', alignItems:'center', justifyContent:'center', background:'#0a0a0a' }}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img 
-                      src={p.img} 
-                      alt={p.name}
-                      style={{ width:240, height:240, objectFit:'cover', borderRadius:'50%' }}
-                    />
-                  </div>
-                  <div style={{ position:'absolute', top:16, right:16, padding:'6px 14px', borderRadius:100, background:'rgba(0,0,0,0.85)', backdropFilter:'blur(10px)', display:'flex', alignItems:'center', gap:6 }}>
-                    <IconStar size={14} color="#FFD700"/>
-                    <span style={{ fontSize:13, fontWeight:700, color:'#fff' }}>{p.rating}</span>
-                  </div>
+                {/* Рейтинг badge */}
+                <div style={{ position:'absolute', top:20, right:20, padding:'6px 12px', borderRadius:100, background:'rgba(0,0,0,0.85)', backdropFilter:'blur(10px)', display:'flex', alignItems:'center', gap:6, zIndex:3 }}>
+                  <IconStar size={14} color="#FFD700"/>
+                  <span style={{ fontSize:13, fontWeight:700, color:'#fff' }}>{p.rating}</span>
                 </div>
 
-                <div style={{ padding:'24px' }}>
-                  <h3 style={{ fontFamily:'Montserrat,sans-serif', fontWeight:700, fontSize:22, color:'#fff', marginBottom:12 }}>{p.name}</h3>
-                  <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:20 }}>
-                    <span style={{ fontSize:13, color:'#888', display:'flex', alignItems:'center', gap:6 }}>
-                      <IconClock size={14} color="#888"/> {p.time}
-                    </span>
+                {/* БОЛЬШАЯ КРУГЛАЯ КАРТИНКА */}
+                <div style={{ display:'flex', justifyContent:'center', marginBottom:20 }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img 
+                    src={p.img} 
+                    alt={p.name}
+                    style={{ width:260, height:260, objectFit:'cover', borderRadius:'50%', transition:'transform .4s ease' }}
+                    onMouseEnter={e => e.currentTarget.style.transform='scale(1.05) rotate(3deg)'}
+                    onMouseLeave={e => e.currentTarget.style.transform='scale(1) rotate(0deg)'}
+                  />
+                </div>
+
+                {/* Название */}
+                <h3 style={{ fontFamily:'Montserrat,sans-serif', fontWeight:700, fontSize:20, color:'#fff', marginBottom:8, textAlign:'left' }}>{p.name}</h3>
+                
+                {/* Время */}
+                <div style={{ display:'flex', alignItems:'center', gap:6, marginBottom:16 }}>
+                  <IconClock size={14} color="#888"/>
+                  <span style={{ fontSize:13, color:'#888' }}>{p.time}</span>
+                </div>
+
+                {/* Цена и кнопка */}
+                <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:12 }}>
+                  <div style={{ fontFamily:'Montserrat,sans-serif', fontWeight:900, fontSize:22, color:'#D32F2F' }}>
+                    {p.price.toLocaleString('ru-RU')} ₸
                   </div>
-                  <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:12 }}>
-                    <div style={{ fontFamily:'Montserrat,sans-serif', fontWeight:900, fontSize:24, color:'#D32F2F' }}>
-                      {p.price.toLocaleString('ru-RU')} ₸
-                    </div>
-                    <button 
-                      style={{ padding:'12px 24px', borderRadius:12, background:'#D32F2F', color:'#fff', fontWeight:700, fontSize:14, border:'none', cursor:'pointer', transition:'all .3s', whiteSpace:'nowrap' }}
-                      onMouseEnter={e=>e.currentTarget.style.background='#B71C1C'}
-                      onMouseLeave={e=>e.currentTarget.style.background='#D32F2F'}>
-                      Выбрать
-                    </button>
-                  </div>
+                  <button 
+                    style={{ padding:'12px 24px', borderRadius:100, background:'#D32F2F', color:'#fff', fontWeight:700, fontSize:14, border:'none', cursor:'pointer', transition:'all .3s', whiteSpace:'nowrap', fontFamily:'Montserrat,sans-serif' }}
+                    onMouseEnter={e=>e.currentTarget.style.background='#B71C1C'}
+                    onMouseLeave={e=>e.currentTarget.style.background='#D32F2F'}>
+                    Выбрать
+                  </button>
                 </div>
               </motion.div>
             ))}
@@ -361,10 +366,19 @@ export default function Home() {
               whileInView={{ opacity:1, x:0 }} 
               viewport={{ once:true }}
               style={{ position:'relative' }}>
-              <div style={{ borderRadius:24, overflow:'hidden', boxShadow:'0 24px 60px rgba(0,0,0,0.6)' }}>
+              <div style={{ 
+                borderRadius:24, 
+                overflow:'hidden', 
+                boxShadow:'0 24px 60px rgba(0,0,0,0.6)'
+              }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="https://cdn.dodostatic.net/static/Img/Products/45cc8ffb190c4a28aaf1863a67f675c7_1875x1875.jpeg" alt="О нас"
-                  style={{ width:'100%', height:500, objectFit:'cover', display:'block' }}/>
+                <img src="https://img-api.yumapos.ru/image/crop/original/e591dca5-0d50-9acf-38d3-b30c7797e62d.png" alt="О нас"
+                  style={{ 
+                    width:'100%', 
+                    height:500, 
+                    objectFit:'cover', 
+                    display:'block'
+                  }}/>
               </div>
             </motion.div>
           </div>

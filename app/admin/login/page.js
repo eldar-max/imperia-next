@@ -7,7 +7,24 @@ import toast from 'react-hot-toast'
 export default function AdminLoginPage() {
   const [code, setCode] = useState('')
   const [loading, setLoading] = useState(false)
+  const [codeSent, setCodeSent] = useState(false)
   const router = useRouter()
+
+  // Автоматически отправить код при загрузке страницы
+  useState(() => {
+    const sendCodeAuto = async () => {
+      try {
+        const res = await fetch('/api/admin/send-code', { method: 'POST' })
+        if (res.ok) {
+          setCodeSent(true)
+          toast.success('Код отправлен в Telegram!')
+        }
+      } catch (err) {
+        console.error('Ошибка отправки кода:', err)
+      }
+    }
+    sendCodeAuto()
+  }, [])
 
   const handleVerify = async (e) => {
     e.preventDefault()
@@ -33,20 +50,29 @@ export default function AdminLoginPage() {
       
       if (res.ok) {
         console.log('✅ Успех!')
-        toast.success('Добро пожаловать в админку!')
         
-        // Сохраняем сессию администратора
+        // Сохраняем сессию администратора в cookies И localStorage
         const now = Date.now()
-        document.cookie = `adminVerified=true; path=/; max-age=3600; SameSite=Strict`
-        document.cookie = `adminVerifiedAt=${now}; path=/; max-age=3600; SameSite=Strict`
-        document.cookie = `adminRole=admin; path=/; max-age=3600; SameSite=Strict`
         
-        console.log('🍪 Cookies:', document.cookie)
+        // Cookies с корректными параметрами
+        document.cookie = `adminVerified=true; path=/; max-age=3600; SameSite=Lax; Secure`
+        document.cookie = `adminVerifiedAt=${now}; path=/; max-age=3600; SameSite=Lax; Secure`
+        document.cookie = `adminRole=admin; path=/; max-age=3600; SameSite=Lax; Secure`
+        
+        // Дублируем в localStorage
+        localStorage.setItem('adminVerified', 'true')
+        localStorage.setItem('adminVerifiedAt', now.toString())
+        localStorage.setItem('adminRole', 'admin')
+        
+        console.log('🍪 Cookies сохранены:', document.cookie)
+        console.log('💾 LocalStorage:', localStorage.getItem('adminRole'))
+        
+        toast.success('Добро пожаловать в админку!')
         
         setTimeout(() => {
           console.log('🚀 Переход на /admin')
-          router.push('/admin')
-        }, 100)
+          window.location.href = '/admin' // Используем window.location для полной перезагрузки
+        }, 500)
       } else {
         console.log('❌ Ошибка:', data.error)
         toast.error(data.error || 'Неверный код')
@@ -86,7 +112,11 @@ export default function AdminLoginPage() {
           Вход в админ-панель
         </h1>
         <p style={{ textAlign:'center', color:'#808080', fontSize:14, lineHeight:1.7, marginBottom:32 }}>
-          Получите код в Telegram боте и введите его здесь
+          {codeSent ? (
+            <>✅ Код отправлен в Telegram! Проверьте сообщения</>
+          ) : (
+            <>Отправляем код в Telegram...</>
+          )}
         </p>
 
         <form onSubmit={handleVerify} style={{ display:'flex', flexDirection:'column', gap:20 }}>

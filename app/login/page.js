@@ -54,12 +54,16 @@ function getFirebaseError(code) {
 }
 
 const inp = (focused) => ({
-  width: '100%', padding: '13px 16px 13px 44px',
-  background: '#1a1a1a',
-  border: `1px solid ${focused ? 'rgba(211,47,47,0.5)' : 'rgba(255,255,255,0.08)'}`,
-  borderRadius: 12, color: '#f0f0f0', fontSize: 15,
-  outline: 'none', fontFamily: 'inherit',
-  boxShadow: focused ? '0 0 0 3px rgba(211,47,47,0.12)' : 'none',
+  width: '280px',
+  padding: '11px 12px 11px 38px',
+  background: '#111',
+  border: `2px solid ${focused ? '#D32F2F' : '#222'}`,
+  borderRadius: 8, 
+  color: '#fff', 
+  fontSize: 13,
+  outline: 'none', 
+  fontFamily: 'inherit',
+  boxShadow: focused ? '0 0 0 3px rgba(211,47,47,0.1)' : 'none',
   transition: 'all .2s',
 })
 
@@ -100,7 +104,7 @@ export default function LoginPage() {
         // Проверяем, является ли пользователь админом
         const adminEmails = ['admin@imperia.com', 'founder@imperia.com', 'isabekoveldat@gmail.com']
         if (adminEmails.includes(form.email.toLowerCase())) {
-          router.push('/admin/verify')
+          router.push('/admin/login')
         } else {
           router.push('/profile')
         }
@@ -129,7 +133,7 @@ export default function LoginPage() {
       // Проверяем, является ли пользователь админом
       const adminEmails = ['admin@imperia.com', 'founder@imperia.com', 'isabekoveldat@gmail.com']
       if (adminEmails.includes(cred.user.email?.toLowerCase())) {
-        router.push('/admin/verify')
+        router.push('/admin/login')
       } else {
         router.push('/profile')
       }
@@ -195,7 +199,7 @@ export default function LoginPage() {
           </div>
         </div>
 
-        <div style={{ background:'#181818', border:'1px solid rgba(255,255,255,0.08)', borderRadius:24, padding:36, boxShadow:'0 24px 64px rgba(0,0,0,0.6)' }}>
+        <div style={{ background:'#181818', border:'1px solid rgba(255,255,255,0.06)', borderRadius:20, padding:32, boxShadow:'0 20px 60px rgba(0,0,0,0.7)' }}>
           <AnimatePresence mode="wait">
 
             {/* ── СБРОС ПАРОЛЯ ─────────────────────── */}
@@ -222,7 +226,7 @@ export default function LoginPage() {
                     </div>
                   </div>
                   <button type="submit" disabled={load}
-                    style={{ width:'100%', padding:'14px', borderRadius:13, background:'#D32F2F', color:'#fff', fontFamily:'Montserrat,sans-serif', fontWeight:700, fontSize:15, border:'none', cursor: load?'not-allowed':'pointer', opacity: load?.6:1, display:'flex', alignItems:'center', justifyContent:'center', gap:8, boxShadow:'0 4px 20px rgba(211,47,47,.4)' }}>
+                    style={{ width:'280px', padding:'13px', borderRadius:10, background:'#D32F2F', color:'#fff', fontFamily:'Montserrat,sans-serif', fontWeight:700, fontSize:14, border:'none', cursor: load?'not-allowed':'pointer', opacity: load?.6:1, display:'flex', alignItems:'center', justifyContent:'center', gap:8, boxShadow:'0 4px 20px rgba(211,47,47,.4)', margin:'0 auto' }}>
                     {load ? <Spinner/> : 'Отправить письмо'}
                   </button>
                 </form>
@@ -255,10 +259,10 @@ export default function LoginPage() {
               <motion.div key="auth" initial={{ opacity:0 }} animate={{ opacity:1 }} exit={{ opacity:0 }}>
 
                 {/* Табы */}
-                <div style={{ display:'flex', background:'#141414', borderRadius:12, padding:4, marginBottom:24, border:'1px solid rgba(255,255,255,0.06)', gap:4 }}>
+                <div style={{ display:'flex', background:'#141414', borderRadius:12, padding:4, marginBottom:24, border:'1px solid rgba(255,255,255,0.06)', gap:8, justifyContent:'center' }}>
                   {[['login','Войти'],['register','Регистрация']].map(([m,l]) => (
                     <button key={m} onClick={() => setMode(m)}
-                      style={{ flex:1, padding:'10px', borderRadius:9, fontSize:14, fontWeight:700, cursor:'pointer', background: mode===m ? '#D32F2F':'transparent', color: mode===m ? '#fff':'#606060', border:'none', transition:'all .2s', fontFamily:'inherit', boxShadow: mode===m ? '0 2px 10px rgba(211,47,47,0.35)':'none' }}>
+                      style={{ padding:'10px 24px', borderRadius:9, fontSize:14, fontWeight:700, cursor:'pointer', background: mode===m ? '#D32F2F':'transparent', color: mode===m ? '#fff':'#606060', border:'none', transition:'all .2s', fontFamily:'inherit', boxShadow: mode===m ? '0 2px 10px rgba(211,47,47,0.35)':'none', whiteSpace:'nowrap' }}>
                       {l}
                     </button>
                   ))}
@@ -268,9 +272,9 @@ export default function LoginPage() {
                 <form onSubmit={submitAuth} style={{ display:'flex', flexDirection:'column', gap:14 }}>
                   {fields.map(([k,l,p,t,ic]) => (
                     <div key={k}>
-                      <label style={{ display:'block', fontSize:13, fontWeight:600, color:'#808080', marginBottom:8 }}>{l}</label>
+                      <label style={{ display:'block', fontSize:12, fontWeight:600, color:'#707070', marginBottom:6 }}>{l}</label>
                       <div style={{ position:'relative' }}>
-                        <span style={{ position:'absolute', left:14, top:'50%', transform:'translateY(-50%)', pointerEvents:'none' }}>{ICONS[ic]}</span>
+                        <span style={{ position:'absolute', left:12, top:'50%', transform:'translateY(-50%)', pointerEvents:'none' }}>{ICONS[ic]}</span>
                         <input type={t} value={form[k]} onChange={set(k)} placeholder={p} required
                           onFocus={() => setFocus(f => ({ ...f, [k]:true }))}
                           onBlur={() => setFocus(f => ({ ...f, [k]:false }))}
@@ -291,7 +295,7 @@ export default function LoginPage() {
 
                   {/* Кнопка входа */}
                   <button type="submit" disabled={load}
-                    style={{ width:'100%', padding:'14px', borderRadius:13, background:'#D32F2F', color:'#fff', fontFamily:'Montserrat,sans-serif', fontWeight:700, fontSize:15, border:'none', cursor: load?'not-allowed':'pointer', opacity: load?.6:1, display:'flex', alignItems:'center', justifyContent:'center', gap:8, marginTop:4, boxShadow:'0 4px 20px rgba(211,47,47,.4)', transition:'background .2s' }}
+                    style={{ width:'280px', padding:'13px', borderRadius:10, background:'#D32F2F', color:'#fff', fontFamily:'Montserrat,sans-serif', fontWeight:700, fontSize:14, border:'none', cursor: load?'not-allowed':'pointer', opacity: load?.6:1, display:'flex', alignItems:'center', justifyContent:'center', gap:8, marginTop:4, boxShadow:'0 4px 20px rgba(211,47,47,.4)', transition:'background .2s', margin:'4px auto 0' }}
                     onMouseEnter={e => { if(!load) e.currentTarget.style.background='#B71C1C' }}
                     onMouseLeave={e => { e.currentTarget.style.background='#D32F2F' }}>
                     {load ? <Spinner/> : mode === 'login' ? 'Войти' : 'Зарегистрироваться'}
@@ -306,7 +310,7 @@ export default function LoginPage() {
 
                 {/* Google кнопка */}
                 <button onClick={handleGoogle} disabled={gLoad}
-                  style={{ width:'100%', padding:'13px', borderRadius:12, background:'#fff', color:'#333', border:'none', cursor: gLoad?'not-allowed':'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:10, fontFamily:'Montserrat,sans-serif', fontWeight:600, fontSize:14, transition:'all .2s', boxShadow:'0 2px 8px rgba(0,0,0,0.3)' }}
+                  style={{ width:'280px', padding:'12px', borderRadius:10, background:'#fff', color:'#333', border:'none', cursor: gLoad?'not-allowed':'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:10, fontFamily:'Montserrat,sans-serif', fontWeight:600, fontSize:13, transition:'all .2s', boxShadow:'0 2px 8px rgba(0,0,0,0.3)', margin:'0 auto' }}
                   onMouseEnter={e => { if(!gLoad) e.currentTarget.style.boxShadow='0 4px 16px rgba(0,0,0,0.4)' }}
                   onMouseLeave={e => { e.currentTarget.style.boxShadow='0 2px 8px rgba(0,0,0,0.3)' }}>
                   {gLoad ? <Spinner/> : <><GoogleIcon /> Войти через Google</>}

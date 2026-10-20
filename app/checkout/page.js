@@ -1,7 +1,7 @@
 ﻿'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import { motion } from 'framer-motion'
@@ -26,6 +26,26 @@ export default function CheckoutPage() {
   const [load, setLoad]     = useState(false)
   const [orderId, setOId]   = useState(null)
   const router = useRouter()
+  const searchParams = useSearchParams()
+
+  // Обработка успешной оплаты через Finik
+  useEffect(() => {
+    const payment = searchParams.get('payment');
+    if (payment === 'success') {
+      // Получаем данные заказа из localStorage
+      const pendingOrder = localStorage.getItem('pending_order');
+      if (pendingOrder) {
+        try {
+          const orderData = JSON.parse(pendingOrder);
+          setOId(orderData.orderId);
+          localStorage.removeItem('pending_order');
+          toast.success('Оплата прошла успешно! 🎉');
+        } catch (err) {
+          console.error('Error parsing pending order:', err);
+        }
+      }
+    }
+  }, [searchParams]);
 
   const sub     = CART_ITEMS.reduce((s,i)=>s+i.price*i.qty,0)
   const delFee  = sub>=80000 ? 0 : 15000
@@ -44,6 +64,42 @@ export default function CheckoutPage() {
     }
     setLoad(true)
     try {
+      // Если выбрана онлайн-оплата через Finik
+      if (form.payment === 'finik') {
+        const orderId = `ORD-${Math.random().toString(36).slice(2,8).toUpperCase()}`;
+        
+        // Создаем платеж в Finik
+        const paymentRes = await fetch('/api/finik/create-payment', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            orderId: orderId,
+            userId: form.phone || 'guest',
+          }),
+        });
+        
+        const paymentData = await paymentRes.json();
+        
+        if (!paymentRes.ok) {
+          throw new Error(paymentData.error || 'Ошибка создания платежа');
+        }
+        
+        // Сохраняем данные заказа в localStorage перед редиректом
+        localStorage.setItem('pending_order', JSON.stringify({
+          orderId,
+          items: CART_ITEMS,
+          customer: { name: form.name, phone: form.phone, email: form.email },
+          delivery: { type: form.type, address: form.address },
+          payment: { method: form.payment },
+          comment: form.comment,
+        }));
+        
+        // Редиректим на страницу оплаты Finik
+        window.location.href = paymentData.paymentUrl;
+        return;
+      }
+      
+      // Обычное оформление заказа (наличные, карта при получении)
       const res = await fetch('/api/orders', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -59,6 +115,8 @@ export default function CheckoutPage() {
       if (!res.ok) throw new Error(data.error)
       setOId(data.id)
     } catch (err) {
+      console.error('Order error:', err);
+      toast.error(err.message || 'Ошибка оформления заказа');
       // Если API недоступен — создаём локальный ID
       setOId(`ORD-${Math.random().toString(36).slice(2,8).toUpperCase()}`)
     } finally {

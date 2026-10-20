@@ -5,21 +5,18 @@ export function middleware(request) {
 
   console.log('[Middleware] Проверка пути:', pathname)
 
-  // ВРЕМЕННО ОТКЛЮЧЕНО ДЛЯ ТЕСТИРОВАНИЯ
-  return NextResponse.next()
-
-  // Проверяем только админские страницы (кроме /admin/verify)
-  if (pathname.startsWith('/admin') && pathname !== '/admin/verify') {
-    // Проверяем наличие подтверждения в headers (будет передано с клиента)
+  // Проверяем только админские страницы (кроме /admin/login)
+  if (pathname.startsWith('/admin') && pathname !== '/admin/login') {
+    // Проверяем наличие подтверждения в cookies
     const verified = request.cookies.get('adminVerified')?.value
     const verifiedAt = request.cookies.get('adminVerifiedAt')?.value
 
     console.log('[Middleware] Cookies:', { verified, verifiedAt })
 
     if (!verified || !verifiedAt) {
-      console.log('[Middleware] ❌ Нет подтверждения - редирект на /admin/verify')
-      // Нет подтверждения - редирект на страницу ввода кода
-      return NextResponse.redirect(new URL('/admin/verify', request.url))
+      console.log('[Middleware] ❌ Нет подтверждения - редирект на /admin/login')
+      // Нет подтверждения - редирект на страницу логина
+      return NextResponse.redirect(new URL('/admin/login', request.url))
     }
 
     // Проверяем, не истекло ли подтверждение (действительно 1 час)
@@ -28,9 +25,9 @@ export function middleware(request) {
     const oneHour = 60 * 60 * 1000
 
     if (now - verifiedTime > oneHour) {
-      console.log('[Middleware] ❌ Подтверждение истекло - редирект на /admin/verify')
+      console.log('[Middleware] ❌ Подтверждение истекло - редирект на /admin/login')
       // Подтверждение истекло - редирект на повторную проверку
-      const response = NextResponse.redirect(new URL('/admin/verify', request.url))
+      const response = NextResponse.redirect(new URL('/admin/login', request.url))
       response.cookies.delete('adminVerified')
       response.cookies.delete('adminVerifiedAt')
       return response
