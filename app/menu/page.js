@@ -11,43 +11,43 @@ const MENU = [
   { id:3, name:'Пицца Том Ям с креветками', price:685, cat:'pizza', badge:'новинка', emoji:null, rating:4.9, time:30, img:'/images/products/pizza-3.png' },
   { id:4, name:'Четыре сыра', price:685, cat:'pizza', badge:null, emoji:null, rating:4.7, time:25, img:'/images/products/pizza-4.png' },
   { id:5, name:'Маргарита', price:495, cat:'pizza', badge:null, emoji:null, rating:4.8, time:25, img:'https://static.vecteezy.com/system/resources/previews/046/828/708/non_2x/fresh-classic-pizza-margarita-top-view-isolated-on-transparent-background-png.png' },
-  { id:6, name:'Пепперони', price:645, cat:'pizza', badge:null, emoji:null, rating:4.9, time:25, img:'https://menu2go.ru/images/food/447/447_642_20230912132844_3541.png' },
-  { id:7, name:'Мясной микс', price:750, cat:'pizza', badge:null, emoji:null, rating:4.9, time:30, img:'https://cdn-ru16.foodpicasso.com/assets/af/2a/dd/40/af2add407bd792b91140c8e868076181---jpg_1000x_103c0_convert.jpg' },
+  { id:6, name:'Пепперони', price:645, cat:'pizza', badge:null, emoji:null, rating:4.9, time:25, img:'/images/products/pizza-6.png' },
+  { id:7, name:'Мясной микс', price:750, cat:'pizza', badge:null, emoji:null, rating:4.9, time:30, img:'/images/products/pizza-7.jpg' },
   
   // Комбо
-  { id:8, name:'Выгодное комбо', price:965, oldPrice:895, cat:'combo', badge:null, rating:4.6, time:35, img:'https://cdn.dummyjson.com/recipe-images/7.webp' },
-  { id:9, name:'Комбо "10 лет"', price:1770, oldPrice:1575, cat:'combo', badge:'новинка', rating:4.8, time:40, img:'https://cdn.dummyjson.com/recipe-images/8.webp' },
-  { id:10, name:'Додо Бокс', price:748, oldPrice:625, cat:'combo', badge:'новинка', rating:4.7, time:30, img:'https://cdn.dummyjson.com/recipe-images/9.webp' },
+  { id:8, name:'Выгодное комбо', price:965, oldPrice:895, cat:'combo', badge:null, rating:4.6, time:35, img:'/images/products/combo-8.webp' },
+  { id:9, name:'Комбо "10 лет"', price:1770, oldPrice:1575, cat:'combo', badge:'новинка', rating:4.8, time:40, img:'/images/products/combo-9.webp' },
+  { id:10, name:'Додо Бокс', price:748, oldPrice:625, cat:'combo', badge:'новинка', rating:4.7, time:30, img:'/images/products/combo-10.webp' },
   
   // Закуски
-  { id:11, name:'Паста Том Ям', price:465, cat:'snacks', badge:'новинка', rating:4.9, time:20, img:'https://cdn.dummyjson.com/recipe-images/10.webp' },
-  { id:12, name:'Креветки в панировке', price:369, cat:'snacks', badge:'новинка', rating:4.8, time:15, img:'https://cdn.dummyjson.com/recipe-images/11.webp' },
-  { id:13, name:'Чикен ролл', price:215, cat:'snacks', badge:'холодный', rating:4.5, time:10, img:'https://cdn.dummyjson.com/recipe-images/12.webp' },
-  { id:14, name:'Сырный стартер', price:225, cat:'snacks', badge:null, rating:4.6, time:12, img:'https://cdn.dummyjson.com/recipe-images/13.webp' },
+  { id:11, name:'Паста Том Ям', price:465, cat:'snacks', badge:'новинка', rating:4.9, time:20, img:'/images/products/snack-11.webp' },
+  { id:12, name:'Креветки в панировке', price:369, cat:'snacks', badge:'новинка', rating:4.8, time:15, img:'/images/products/snack-12.webp' },
+  { id:13, name:'Чикен ролл', price:215, cat:'snacks', badge:'холодный', rating:4.5, time:10, img:'/images/products/snack-13.webp' },
+  { id:14, name:'Сырный стартер', price:225, cat:'snacks', badge:null, rating:4.6, time:12, img:'/images/products/snack-14.webp' },
   
   // Десерты
-  { id:15, name:'Эскимо Куликов', price:189, cat:'desserts', badge:null, rating:4.7, time:5, img:'https://cdn.dummyjson.com/recipe-images/14.webp' },
-  { id:16, name:'Пирожное Лимончелло', price:215, cat:'desserts', badge:null, rating:4.8, time:5, img:'https://cdn.dummyjson.com/recipe-images/15.webp' },
-  { id:17, name:'Додобоны', price:155, cat:'desserts', badge:null, rating:4.6, time:5, img:'https://cdn.dummyjson.com/recipe-images/16.webp' },
-  { id:18, name:'Бруслетики', price:235, cat:'desserts', badge:'обновили', rating:4.9, time:8, img:'https://cdn.dummyjson.com/recipe-images/17.webp' },
+  { id:15, name:'Эскимо Куликов', price:189, cat:'desserts', badge:null, rating:4.7, time:5, img:'/images/products/dessert-15.webp' },
+  { id:16, name:'Пирожное Лимончелло', price:215, cat:'desserts', badge:null, rating:4.8, time:5, img:'/images/products/dessert-16.webp' },
+  { id:17, name:'Додобоны', price:155, cat:'desserts', badge:null, rating:4.6, time:5, img:'/images/products/dessert-17.webp' },
+  { id:18, name:'Бруслетики', price:235, cat:'desserts', badge:'обновили', rating:4.9, time:8, img:'/images/products/dessert-18.webp' },
   
   // Коктейли
-  { id:19, name:'Молочный коктейль Солёная карамель', price:245, cat:'drinks', badge:'новинка', rating:4.8, time:8, img:'https://cdn.dummyjson.com/recipe-images/18.webp' },
-  { id:20, name:'Молочный с печеньем Oreo', price:245, cat:'drinks', badge:null, rating:4.9, time:8, img:'https://cdn.dummyjson.com/recipe-images/19.webp' },
-  { id:21, name:'Классический молочный', price:235, cat:'drinks', badge:null, rating:4.7, time:8, img:'https://cdn.dummyjson.com/recipe-images/20.webp' },
-  { id:22, name:'Клубничный молочный', price:245, cat:'drinks', badge:null, rating:4.8, time:8, img:'https://cdn.dummyjson.com/recipe-images/21.webp' },
+  { id:19, name:'Молочный коктейль Солёная карамель', price:245, cat:'drinks', badge:'новинка', rating:4.8, time:8, img:'/images/products/drink-19.webp' },
+  { id:20, name:'Молочный с печеньем Oreo', price:245, cat:'drinks', badge:null, rating:4.9, time:8, img:'/images/products/drink-20.webp' },
+  { id:21, name:'Классический молочный', price:235, cat:'drinks', badge:null, rating:4.7, time:8, img:'/images/products/drink-21.webp' },
+  { id:22, name:'Клубничный молочный', price:245, cat:'drinks', badge:null, rating:4.8, time:8, img:'/images/products/drink-22.webp' },
   
   // Кофе
-  { id:23, name:'Ванильный Айс Американо', price:145, cat:'coffee', badge:null, rating:4.6, time:5, img:'https://cdn.dummyjson.com/recipe-images/22.webp' },
-  { id:24, name:'Карамельный Айс Американо', price:145, cat:'coffee', badge:null, rating:4.7, time:5, img:'https://cdn.dummyjson.com/recipe-images/23.webp' },
-  { id:25, name:'Ореховый Айс Американо', price:145, cat:'coffee', badge:null, rating:4.6, time:5, img:'https://cdn.dummyjson.com/recipe-images/24.webp' },
-  { id:26, name:'Ванильный Айс Латте', price:169, cat:'coffee', badge:null, rating:4.8, time:6, img:'https://cdn.dummyjson.com/recipe-images/25.webp' },
+  { id:23, name:'Ванильный Айс Американо', price:145, cat:'coffee', badge:null, rating:4.6, time:5, img:'/images/products/coffee-23.webp' },
+  { id:24, name:'Карамельный Айс Американо', price:145, cat:'coffee', badge:null, rating:4.7, time:5, img:'/images/products/coffee-24.webp' },
+  { id:25, name:'Ореховый Айс Американо', price:145, cat:'coffee', badge:null, rating:4.6, time:5, img:'/images/products/coffee-25.webp' },
+  { id:26, name:'Ванильный Айс Латте', price:169, cat:'coffee', badge:null, rating:4.8, time:6, img:'/images/products/coffee-26.webp' },
   
   // Напитки
-  { id:27, name:'Чалап', price:60, cat:'beverages', badge:null, rating:4.5, time:3, img:'https://cdn.dummyjson.com/recipe-images/26.webp' },
-  { id:28, name:'Айс-ти груша-фейхоа', price:159, cat:'beverages', badge:'новинка', rating:4.7, time:5, img:'https://cdn.dummyjson.com/recipe-images/27.webp' },
-  { id:29, name:'Айс-ти инжир бузина', price:159, cat:'beverages', badge:'новинка', rating:4.8, time:5, img:'https://cdn.dummyjson.com/recipe-images/28.webp' },
-  { id:30, name:'Лимонад Голубика-Лайм', price:159, cat:'beverages', badge:'новинка', rating:4.9, time:5, img:'https://cdn.dummyjson.com/recipe-images/29.webp' },
+  { id:27, name:'Чалап', price:60, cat:'beverages', badge:null, rating:4.5, time:3, img:'/images/products/beverage-27.webp' },
+  { id:28, name:'Айс-ти груша-фейхоа', price:159, cat:'beverages', badge:'новинка', rating:4.7, time:5, img:'/images/products/beverage-28.webp' },
+  { id:29, name:'Айс-ти инжир бузина', price:159, cat:'beverages', badge:'новинка', rating:4.8, time:5, img:'/images/products/beverage-29.webp' },
+  { id:30, name:'Лимонад Голубика-Лайм', price:159, cat:'beverages', badge:'новинка', rating:4.9, time:5, img:'/images/products/beverage-30.webp' },
 ]
 
 const CATS = [
