@@ -7,10 +7,10 @@ import Footer from '@/components/layout/Footer'
 import { IconClock, IconStar, IconTruck, IconShield, IconArrow, IconBuilding, IconHistory, IconChef, IconQuote, IconPhone, IconMail, IconInstagram, IconTelegram, IconGift, IconMap } from '@/components/ui/Icons'
 
 const POPULAR = [
-  { id:1, name:'Брусничный Бум',   price:49000, rating:4.8, time:'25 мин', type:'pizza', img:'https://image.vsem-edu-oblako.ru/upload/store/merchant5838/31edb647a9c9a8951a5bde726ea696d7.png?w=900&h=675' },
-  { id:2, name:'Пицца Том Ям с цыпленком',   price:59000, rating:4.9, time:'30 мин', type:'pizza', img:'https://img-api.yumapos.ru/image/crop/original/e591dca5-0d50-9acf-38d3-b30c7797e62d.png' },
-  { id:3, name:'Пицца Том Ям с креветками',      price:65000, rating:4.9, time:'30 мин', type:'pizza', img:'https://avatars.mds.yandex.net/get-eda/13439948/058ca8b3f1a44667adda4f2b42903f88/M_height' },
-  { id:4, name:'Четыре сыра', price:75000, rating:4.7, time:'25 мин', type:'pizza', img:'https://img-api.yumapos.ru/image/crop/original/e591dca5-0d50-9acf-38d3-b30c7797e62d.png' },
+  { id:1, name:'Брусничный Бум',   price:49000, rating:4.8, time:'25 мин', type:'pizza', img:'/images/products/pizza-1.png' },
+  { id:2, name:'Пицца Том Ям с цыпленком',   price:59000, rating:4.9, time:'30 мин', type:'pizza', img:'/images/products/pizza-2.png' },
+  { id:3, name:'Пицца Том Ям с креветками',      price:65000, rating:4.9, time:'30 мин', type:'pizza', img:'/images/products/pizza-3.png' },
+  { id:4, name:'Четыре сыра', price:75000, rating:4.7, time:'25 мин', type:'pizza', img:'/images/products/pizza-4.png' },
 ]
 
 export default function Home() {

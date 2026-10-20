@@ -6,10 +6,10 @@ import { useCart } from '@/app/context/CartContext'
 
 const MENU = [
   // Пиццы
-  { id:1, name:'Брусничный Бум', price:365, cat:'pizza', badge:null, emoji:'🍇😋', rating:4.8, time:25, img:'https://image.vsem-edu-oblako.ru/upload/store/merchant5838/31edb647a9c9a8951a5bde726ea696d7.png?w=900&h=675' },
-  { id:2, name:'Пицца Том Ям с цыпленком', price:545, cat:'pizza', badge:'новинка', emoji:null, rating:4.9, time:30, img:'https://img-api.yumapos.ru/image/crop/original/e591dca5-0d50-9acf-38d3-b30c7797e62d.png' },
-  { id:3, name:'Пицца Том Ям с креветками', price:685, cat:'pizza', badge:'новинка', emoji:null, rating:4.9, time:30, img:'https://avatars.mds.yandex.net/get-eda/13439948/058ca8b3f1a44667adda4f2b42903f88/M_height' },
-  { id:4, name:'Четыре сыра', price:685, cat:'pizza', badge:null, emoji:null, rating:4.7, time:25, img:'https://img-api.yumapos.ru/image/crop/original/e591dca5-0d50-9acf-38d3-b30c7797e62d.png' },
+  { id:1, name:'Брусничный Бум', price:365, cat:'pizza', badge:null, emoji:'🍇😋', rating:4.8, time:25, img:'/images/products/pizza-1.png' },
+  { id:2, name:'Пицца Том Ям с цыпленком', price:545, cat:'pizza', badge:'новинка', emoji:null, rating:4.9, time:30, img:'/images/products/pizza-2.png' },
+  { id:3, name:'Пицца Том Ям с креветками', price:685, cat:'pizza', badge:'новинка', emoji:null, rating:4.9, time:30, img:'/images/products/pizza-3.png' },
+  { id:4, name:'Четыре сыра', price:685, cat:'pizza', badge:null, emoji:null, rating:4.7, time:25, img:'/images/products/pizza-4.png' },
   { id:5, name:'Маргарита', price:495, cat:'pizza', badge:null, emoji:null, rating:4.8, time:25, img:'https://static.vecteezy.com/system/resources/previews/046/828/708/non_2x/fresh-classic-pizza-margarita-top-view-isolated-on-transparent-background-png.png' },
   { id:6, name:'Пепперони', price:645, cat:'pizza', badge:null, emoji:null, rating:4.9, time:25, img:'https://menu2go.ru/images/food/447/447_642_20230912132844_3541.png' },
   { id:7, name:'Мясной микс', price:750, cat:'pizza', badge:null, emoji:null, rating:4.9, time:30, img:'https://cdn-ru16.foodpicasso.com/assets/af/2a/dd/40/af2add407bd792b91140c8e868076181---jpg_1000x_103c0_convert.jpg' },
