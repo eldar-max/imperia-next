@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import toast from 'react-hot-toast'
@@ -11,7 +11,9 @@ export default function AdminLoginPage() {
   const router = useRouter()
 
   // Автоматически отправить код при загрузке страницы
-  useState(() => {
+  useEffect(() => {
+    if (typeof window === 'undefined') return // Только в браузере
+    
     const sendCodeAuto = async () => {
       try {
         const res = await fetch('/api/admin/send-code', { method: 'POST' })
