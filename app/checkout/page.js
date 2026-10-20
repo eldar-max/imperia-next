@@ -1,5 +1,5 @@
 ﻿'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Header from '@/components/layout/Header'
@@ -18,7 +18,7 @@ const CART_ITEMS = [
   { name:'Маргарита', qty:1, price:49000 },
 ]
 
-export default function CheckoutPage() {
+function CheckoutContent() {
   const [step, setStep]     = useState(0)
   const { t }     = useI18n()
   const { tPage } = usePageTranslation('checkout')
@@ -265,5 +265,13 @@ export default function CheckoutPage() {
       <Footer/>
       <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
     </div>
+  )
+}
+
+export default function CheckoutPage() {
+  return (
+    <Suspense fallback={<div style={{minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center',background:'#080808'}}><div style={{color:'#f0f0f0'}}>Загрузка...</div></div>}>
+      <CheckoutContent />
+    </Suspense>
   )
 }
