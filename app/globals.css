@@ -1133,3 +1133,310 @@ img { display: block; max-width: 100%; }
 }
 
 
+
+/* ═══ MOBILE OPTIMIZATION ═══════════════════════════════ */
+
+/* Tablets and below */
+@media (max-width: 1024px) {
+  .wrap {
+    padding: 0 24px;
+  }
+  
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 60px !important;
+  }
+  
+  .hero-image {
+    order: -1;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+  
+  body {
+    font-size: 14px;
+  }
+  
+  .wrap {
+    padding: 0 16px;
+  }
+  
+  .spacer-70 {
+    height: 50px;
+  }
+  
+  /* Hero section */
+  .hero-section {
+    min-height: auto !important;
+    padding: 80px 20px 60px !important;
+  }
+  
+  .hero-title {
+    font-size: 36px !important;
+    line-height: 1.1 !important;
+    margin-bottom: 16px !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 16px !important;
+    margin-bottom: 32px !important;
+  }
+  
+  .hero-buttons {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+  
+  .hero-buttons a,
+  .hero-buttons button {
+    width: 100%;
+    justify-content: center !important;
+    padding: 16px 24px !important;
+    font-size: 15px !important;
+  }
+  
+  /* Popular section */
+  .popular-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  
+  .popular-card {
+    max-width: 100%;
+  }
+  
+  /* Features */
+  .features-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  
+  /* Footer */
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+    text-align: center;
+  }
+  
+  .footer-social {
+    justify-content: center !important;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  html {
+    font-size: 13px;
+  }
+  
+  .wrap {
+    padding: 0 12px;
+  }
+  
+  .hero-title {
+    font-size: 28px !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 14px !important;
+  }
+  
+  /* Menu cards */
+  .menu-card-image {
+    width: 200px !important;
+    height: 200px !important;
+  }
+  
+  /* Buttons */
+  button,
+  .btn {
+    font-size: 14px !important;
+    padding: 12px 20px !important;
+  }
+}
+
+/* Landscape mobile fix */
+@media (max-width: 768px) and (orientation: landscape) {
+  .hero-section {
+    min-height: auto !important;
+    padding: 60px 20px 40px !important;
+  }
+}
+
+/* ═══ PAGE-SPECIFIC RESPONSIVE ═══════════════════════ */
+
+/* Hero grid */
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 60px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-grid {
+    gap: 40px !important;
+  }
+}
+
+/* Features, products, reviews - 4 columns */
+@media (max-width: 1200px) {
+  [style*="gridTemplateColumns:'repeat(4,1fr')"],
+  [style*="gridTemplateColumns:'repeat(4, 1fr')"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  [style*="gridTemplateColumns:'repeat(4,1fr')"],
+  [style*="gridTemplateColumns:'repeat(4, 1fr')"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* 3 columns - reviews, branches */
+@media (max-width: 1024px) {
+  [style*="gridTemplateColumns:'repeat(3,1fr')"],
+  [style*="gridTemplateColumns:'repeat(3, 1fr')"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* 2 columns - about, promo */
+@media (max-width: 768px) {
+  [style*="gridTemplateColumns:'repeat(2,1fr')"],
+  [style*="gridTemplateColumns:'repeat(2, 1fr')"],
+  [style*="gridTemplateColumns:'1fr 1fr'"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Paddings on mobile */
+@media (max-width: 768px) {
+  [style*="padding:'120px"] {
+    padding: 60px 20px !important;
+  }
+  
+  [style*="padding:'0 40px'"] {
+    padding: 0 20px !important;
+  }
+  
+  [style*="gap:100"] {
+    gap: 40px !important;
+  }
+  
+  [style*="gap:80"] {
+    gap: 40px !important;
+  }
+}
+
+/* Touch-friendly buttons */
+@media (max-width: 768px) {
+  button, a[style*="padding"] {
+    min-height: 44px !important;
+  }
+}
+
+/* ═══ MENU PAGE RESPONSIVE ═══════════════════════ */
+
+@media (max-width: 768px) {
+  /* Menu grid - 1 column on mobile */
+  [style*="gridTemplateColumns:'repeat(auto-fill, minmax(300px, 1fr')"] {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  
+  /* Category tabs - smaller on mobile */
+  [style*="padding:'14px 32px'"] {
+    padding: 12px 24px !important;
+    font-size: 14px !important;
+  }
+  
+  /* Menu card images - smaller */
+  [style*="width:280"] {
+    width: 220px !important;
+    height: 220px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Even smaller cards */
+  [style*="width:280"] {
+    width: 180px !important;
+    height: 180px !important;
+  }
+  
+  /* Category tabs scroll */
+  [style*="overflowX:'auto'"] {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Touch-friendly menu cards */
+@media (hover: none) and (pointer: coarse) {
+  [style*="cursor:'pointer'"][style*="background:'#0a0a0a'"] {
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* ═══ HEADER RESPONSIVE ═══════════════════════ */
+
+@media (max-width: 1024px) {
+  .header-inner {
+    gap: 16px !important;
+  }
+  
+  /* Hide desktop nav on tablets */
+  .nav-desktop {
+    display: none !important;
+  }
+  
+  /* Show mobile menu button */
+  .mobile-menu-btn {
+    display: flex !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    height: 60px !important;
+  }
+  
+  .header-inner {
+    height: 60px !important;
+  }
+  
+  .logo-name {
+    font-size: 15px !important;
+  }
+  
+  /* Mobile menu overlay */
+  .mobile-menu {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(8, 8, 8, 0.98);
+    backdrop-filter: blur(20px);
+    z-index: 999;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  
+  .mobile-menu-item {
+    width: 100%;
+    padding: 16px 20px !important;
+    text-align: left;
+    font-size: 16px !important;
+    border-radius: 12px;
+    margin-bottom: 8px;
+  }
+}

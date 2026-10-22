@@ -32,7 +32,7 @@ export default function Home() {
         </motion.div>
 
         <div style={{ maxWidth:1400, margin:'0 auto', padding:'120px 40px 80px', width:'100%', position:'relative', zIndex:1 }}>
-          <div style={{ display:'grid', gridTemplateColumns:'1.1fr 0.9fr', gap:100, alignItems:'center' }}>
+          <div className="hero-grid" style={{ display:'grid', gridTemplateColumns:'1.1fr 0.9fr', gap:100, alignItems:'center' }}>
 
             {/* Левая часть */}
             <motion.div initial={{ opacity:0, x:-50 }} animate={{ opacity:1, x:0 }} transition={{ duration:0.8 }}>
