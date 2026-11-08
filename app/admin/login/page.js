@@ -124,7 +124,7 @@ export default function AdminLoginPage() {
         <form onSubmit={handleVerify} style={{ display:'flex', flexDirection:'column', gap:20 }}>
           
           <div>
-            <label style={{ display:'block', fontSize:13, fontWeight:600, color:'#808080', marginBottom:10 }}>
+            <label style={{ display:'block', fontSize:16, fontWeight:700, color:'#f0f0f0', marginBottom:10 }}>
               Введите 6-значный код {code.length > 0 && `(${code.length}/6)`}
             </label>
             <input
