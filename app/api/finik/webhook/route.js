@@ -94,40 +94,89 @@ export async function POST(request) {
 
       console.log(`✅ [PAYMENT_SUCCESS] Order ID: ${orderId} | Amount: ${body.amount} сом | Transaction: ${body.transactionId}`);
       
-      // ЗДЕСЬ ВАША ЛОГИКА ОБРАБОТКИ УСПЕШНОГО ПЛАТЕЖА
-      // Например:
-      // - Обновление статуса заказа в БД
-      // - Отправка email уведомления
-      // - Активация подписки
-      // - Начисление баланса и т.д.
+      // Импортируем prisma (добавить в начало файла)
+      const prisma = (await import('@/lib/prisma')).default;
       
-      // Пример (адаптируйте под вашу БД):
-      /*
-      await prisma.order.update({
-        where: { id: orderId },
-        data: {
-          status: 'PAID',
-          transactionId: body.transactionId,
-          paidAt: new Date(body.transactionDate),
-          amount: body.amount,
-        },
-      });
-      */
-      
-      console.log(`📧 TODO: Send confirmation email to user ${userId}`);
-      console.log(`📦 TODO: Update order ${orderId} status to PAID`);
+      try {
+        // Обновляем статус заказа в базе данных
+        const updatedOrder = await prisma.order.update({
+          where: { id: orderId },
+          data: {
+            paymentStatus: 'paid',
+            transactionId: body.transactionId,
+            paidAt: new Date(body.transactionDate || new Date()),
+            status: 'confirmed', // Автоматически подтверждаем заказ после оплаты
+          },
+        });
+        
+        console.log(`✅ Заказ ${orderId} успешно обновлён: статус = paid, confirmed`);
+        
+        // Отправка уведомления клиенту (опционально)
+        if (userId) {
+          // Здесь можно добавить отправку email/SMS/push уведомления
+          console.log(`📧 Отправка уведомления пользователю ${userId}`);
+          
+          // Пример отправки через API
+          try {
+            await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/orders/notify`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                orderId,
+                status: 'paid',
+                message: 'Ваш заказ успешно оплачен и принят в работу!'
+              })
+            });
+          } catch (notifyError) {
+            console.error('Ошибка отправки уведомления:', notifyError);
+          }
+        }
+        
+      } catch (dbError) {
+        console.error(`❌ Ошибка обновления заказа ${orderId}:`, dbError);
+        // Не возвращаем ошибку в Finik, чтобы не было повторных попыток
+        // Сохраняем в лог для ручной обработки
+      }
     } 
     // 8. Обработка неудачного платежа
     else if (body.status === 'FAILED' || body.status === 'failed') {
       const { userId, orderId } = metadata;
       console.error(`❌ [PAYMENT_FAILED] Order ID: ${orderId} | Transaction: ${body.transactionId}`);
       
-      // ЗДЕСЬ ВАША ЛОГИКА ОБРАБОТКИ НЕУДАЧНОГО ПЛАТЕЖА
-      // Например:
-      // - Обновление статуса заказа
-      // - Отправка уведомления пользователю
+      const prisma = (await import('@/lib/prisma')).default;
       
-      console.log(`📧 TODO: Send payment failed notification to user ${userId}`);
+      try {
+        // Обновляем статус платежа на failed
+        await prisma.order.update({
+          where: { id: orderId },
+          data: {
+            paymentStatus: 'failed',
+            status: 'cancelled', // Отменяем заказ при неудачной оплате
+          },
+        });
+        
+        console.log(`❌ Заказ ${orderId} отменён из-за неудачной оплаты`);
+        
+        // Отправка уведомления об ошибке
+        if (userId) {
+          try {
+            await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/orders/notify`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                orderId,
+                status: 'failed',
+                message: 'К сожалению, оплата не прошла. Попробуйте снова.'
+              })
+            });
+          } catch (notifyError) {
+            console.error('Ошибка отправки уведомления:', notifyError);
+          }
+        }
+        
+      } catch (dbError) {
+        console.error(`❌ Ошибка обновления заказа ${orderId}:`, dbError);
+      }
     }
 
     // 9. Возврат успешного ответа

@@ -163,12 +163,30 @@ export default function Header() {
                   style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '6px 12px 6px 6px', borderRadius: 10, cursor: 'pointer', background: userOpen ? 'rgba(211,47,47,0.1)' : 'rgba(255,255,255,0.05)', border: `1px solid ${userOpen ? 'rgba(211,47,47,0.3)' : 'rgba(255,255,255,0.1)'}`, transition: 'all .2s' }}>
                   {user.avatar ? (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img src={user.avatar} alt={user.name} style={{ width: 28, height: 28, borderRadius: '50%', objectFit: 'cover' }}/>
-                  ) : (
-                    <div style={{ width: 28, height: 28, borderRadius: '50%', background: '#D32F2F', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700, color: '#fff', flexShrink: 0 }}>
-                      {initials}
-                    </div>
-                  )}
+                    <img 
+                      src={user.avatar} 
+                      alt={user.name} 
+                      onError={(e) => { 
+                        e.target.style.display = 'none'
+                        e.target.nextSibling.style.display = 'flex'
+                      }}
+                      style={{ width: 28, height: 28, borderRadius: '50%', objectFit: 'cover' }}/>
+                  ) : null}
+                  <div style={{ 
+                    width: 28, 
+                    height: 28, 
+                    borderRadius: '50%', 
+                    background: '#D32F2F', 
+                    display: user.avatar ? 'none' : 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'center', 
+                    fontSize: 12, 
+                    fontWeight: 700, 
+                    color: '#fff', 
+                    flexShrink: 0 
+                  }}>
+                    {initials}
+                  </div>
                   <span style={{ fontSize: 14, fontWeight: 600, color: '#e0e0e0', maxWidth: 100, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {user.name?.split(' ')[0]}
                   </span>
