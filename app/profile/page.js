@@ -1,10 +1,11 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import { useI18n } from '@/app/i18n/context'
 import { usePageTranslation } from '@/app/i18n/usePageTranslation'
+import { useAuth } from '@/context/AuthContext'
 
 const ORDERS = [
   { id:'ORD-1A2B', date:'16.09.2026', total:157000, status:'delivered',  items:['Пепперони ×2','Маргарита ×1'] },
@@ -21,9 +22,25 @@ const STATUS = {
 export default function ProfilePage() {
   const { t }     = useI18n()
   const { tPage } = usePageTranslation('profile')
+  const { user }  = useAuth()
   const [tab,  setTab]  = useState('orders')
   const [edit, setEdit] = useState(false)
-  const [form, setForm] = useState({ name:'Алишер Каримов', phone:'+998 90 123 45 67', email:'ali@example.com' })
+  const [form, setForm] = useState({ 
+    name: '', 
+    phone: '+998 90 123 45 67', 
+    email: '' 
+  })
+
+  // Инициализируем форму данными пользователя
+  useEffect(() => {
+    if (user) {
+      setForm({
+        name: user.name || 'Пользователь',
+        phone: '+998 90 123 45 67',
+        email: user.email || ''
+      })
+    }
+  }, [user])
 
   return (
     <div style={{ minHeight:'100vh', background:'#080808', color:'#f0f0f0' }}>
